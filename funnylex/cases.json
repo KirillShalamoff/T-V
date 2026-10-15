@@ -1,0 +1,1608 @@
+{
+ "cases": [
+  {
+   "name": "пустая строка",
+   "input": "",
+   "negative": false,
+   "expect": []
+  },
+  {
+   "name": "только пробелы",
+   "input": "     ",
+   "negative": false,
+   "expect": []
+  },
+  {
+   "name": "только табы",
+   "input": "\t\t\t",
+   "negative": false,
+   "expect": []
+  },
+  {
+   "name": "только CRLF",
+   "input": "\r\n\r\n",
+   "negative": false,
+   "expect": []
+  },
+  {
+   "name": "одиночный CR",
+   "input": "\r",
+   "negative": false,
+   "expect": []
+  },
+  {
+   "name": "одиночный LF",
+   "input": "\n",
+   "negative": false,
+   "expect": []
+  },
+  {
+   "name": "смесь пробелов/табов/CRLF",
+   "input": " \t\r\n \t\n\r ",
+   "negative": false,
+   "expect": []
+  },
+  {
+   "name": "0",
+   "input": "0",
+   "negative": false,
+   "expect": [
+    [
+     "INT",
+     "0"
+    ]
+   ]
+  },
+  {
+   "name": "однозначное",
+   "input": "7",
+   "negative": false,
+   "expect": [
+    [
+     "INT",
+     "7"
+    ]
+   ]
+  },
+  {
+   "name": "многозначное",
+   "input": "1234567890",
+   "negative": false,
+   "expect": [
+    [
+     "INT",
+     "1234567890"
+    ]
+   ]
+  },
+  {
+   "name": "с нулями внутри",
+   "input": "100500",
+   "negative": false,
+   "expect": [
+    [
+     "INT",
+     "100500"
+    ]
+   ]
+  },
+  {
+   "name": "два нуля через пробел",
+   "input": "0 0",
+   "negative": false,
+   "expect": [
+    [
+     "INT",
+     "0"
+    ],
+    [
+     "INT",
+     "0"
+    ]
+   ]
+  },
+  {
+   "name": "число+идент без пробела",
+   "input": "1abc",
+   "negative": false,
+   "expect": [
+    [
+     "INT",
+     "1"
+    ],
+    [
+     "IDENT",
+     "abc"
+    ]
+   ]
+  },
+  {
+   "name": "00 (ведущий ноль)",
+   "input": "00",
+   "negative": true,
+   "expect": [
+    [
+     "INT_LEADING_ZERO",
+     "00"
+    ]
+   ]
+  },
+  {
+   "name": "01 (ведущий ноль)",
+   "input": "01",
+   "negative": true,
+   "expect": [
+    [
+     "INT_LEADING_ZERO",
+     "01"
+    ]
+   ]
+  },
+  {
+   "name": "007 (ведущий ноль)",
+   "input": "007",
+   "negative": true,
+   "expect": [
+    [
+     "INT_LEADING_ZERO",
+     "007"
+    ]
+   ]
+  },
+  {
+   "name": "ведущий ноль в выражении",
+   "input": "x = 012;",
+   "negative": true,
+   "expect": [
+    [
+     "IDENT",
+     "x"
+    ],
+    [
+     "ASSIGN",
+     "="
+    ],
+    [
+     "INT_LEADING_ZERO",
+     "012"
+    ],
+    [
+     "SEMI",
+     ";"
+    ]
+   ]
+  },
+  {
+   "name": "дробь не поддерживается",
+   "input": "1.5",
+   "negative": true,
+   "expect": [
+    [
+     "INT",
+     "1"
+    ],
+    [
+     "TRAP",
+     "."
+    ],
+    [
+     "INT",
+     "5"
+    ]
+   ]
+  },
+  {
+   "name": "одна буква",
+   "input": "x",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "x"
+    ]
+   ]
+  },
+  {
+   "name": "одно подчёркивание",
+   "input": "_",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "_"
+    ]
+   ]
+  },
+  {
+   "name": "много подчёркиваний",
+   "input": "___",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "___"
+    ]
+   ]
+  },
+  {
+   "name": "_ в начале",
+   "input": "_foo",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "_foo"
+    ]
+   ]
+  },
+  {
+   "name": "_ в середине",
+   "input": "foo_bar",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "foo_bar"
+    ]
+   ]
+  },
+  {
+   "name": "_ в конце",
+   "input": "foo_",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "foo_"
+    ]
+   ]
+  },
+  {
+   "name": "__init__",
+   "input": "__init__",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "__init__"
+    ]
+   ]
+  },
+  {
+   "name": "_ и цифры",
+   "input": "_1a_2",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "_1a_2"
+    ]
+   ]
+  },
+  {
+   "name": "заглавные",
+   "input": "CamelCase_X9",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "CamelCase_X9"
+    ]
+   ]
+  },
+  {
+   "name": "ключевое слово function",
+   "input": "function",
+   "negative": false,
+   "expect": [
+    [
+     "KW_FUNCTION",
+     "function"
+    ]
+   ]
+  },
+  {
+   "name": "ключевое слово returns",
+   "input": "returns",
+   "negative": false,
+   "expect": [
+    [
+     "KW_RETURNS",
+     "returns"
+    ]
+   ]
+  },
+  {
+   "name": "ключевое слово while",
+   "input": "while",
+   "negative": false,
+   "expect": [
+    [
+     "KW_WHILE",
+     "while"
+    ]
+   ]
+  },
+  {
+   "name": "ключевое слово if",
+   "input": "if",
+   "negative": false,
+   "expect": [
+    [
+     "KW_IF",
+     "if"
+    ]
+   ]
+  },
+  {
+   "name": "ключевое слово else",
+   "input": "else",
+   "negative": false,
+   "expect": [
+    [
+     "KW_ELSE",
+     "else"
+    ]
+   ]
+  },
+  {
+   "name": "ключевое слово assert",
+   "input": "assert",
+   "negative": false,
+   "expect": [
+    [
+     "KW_ASSERT",
+     "assert"
+    ]
+   ]
+  },
+  {
+   "name": "ключевое слово assume",
+   "input": "assume",
+   "negative": false,
+   "expect": [
+    [
+     "KW_ASSUME",
+     "assume"
+    ]
+   ]
+  },
+  {
+   "name": "ключевое слово invariant",
+   "input": "invariant",
+   "negative": false,
+   "expect": [
+    [
+     "KW_INVARIANT",
+     "invariant"
+    ]
+   ]
+  },
+  {
+   "name": "ключевое слово length",
+   "input": "length",
+   "negative": false,
+   "expect": [
+    [
+     "KW_LENGTH",
+     "length"
+    ]
+   ]
+  },
+  {
+   "name": "functions",
+   "input": "functions",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "functions"
+    ]
+   ]
+  },
+  {
+   "name": "func (префикс)",
+   "input": "func",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "func"
+    ]
+   ]
+  },
+  {
+   "name": "iff",
+   "input": "iff",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "iff"
+    ]
+   ]
+  },
+  {
+   "name": "if_",
+   "input": "if_",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "if_"
+    ]
+   ]
+  },
+  {
+   "name": "_if",
+   "input": "_if",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "_if"
+    ]
+   ]
+  },
+  {
+   "name": "if1",
+   "input": "if1",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "if1"
+    ]
+   ]
+  },
+  {
+   "name": "elseif",
+   "input": "elseif",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "elseif"
+    ]
+   ]
+  },
+  {
+   "name": "lengthy",
+   "input": "lengthy",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "lengthy"
+    ]
+   ]
+  },
+  {
+   "name": "assum (префикс)",
+   "input": "assum",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "assum"
+    ]
+   ]
+  },
+  {
+   "name": "invariants",
+   "input": "invariants",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "invariants"
+    ]
+   ]
+  },
+  {
+   "name": "регистр важен: Function",
+   "input": "Function",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "Function"
+    ]
+   ]
+  },
+  {
+   "name": "регистр важен: IF",
+   "input": "IF",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "IF"
+    ]
+   ]
+  },
+  {
+   "name": "if else",
+   "input": "if else",
+   "negative": false,
+   "expect": [
+    [
+     "KW_IF",
+     "if"
+    ],
+    [
+     "KW_ELSE",
+     "else"
+    ]
+   ]
+  },
+  {
+   "name": "ключевые слова через CRLF",
+   "input": "while\r\nassert\tassume",
+   "negative": false,
+   "expect": [
+    [
+     "KW_WHILE",
+     "while"
+    ],
+    [
+     "KW_ASSERT",
+     "assert"
+    ],
+    [
+     "KW_ASSUME",
+     "assume"
+    ]
+   ]
+  },
+  {
+   "name": "все разделители слитно",
+   "input": "()[]{},;:",
+   "negative": false,
+   "expect": [
+    [
+     "LPAREN",
+     "("
+    ],
+    [
+     "RPAREN",
+     ")"
+    ],
+    [
+     "LBRACKET",
+     "["
+    ],
+    [
+     "RBRACKET",
+     "]"
+    ],
+    [
+     "LBRACE",
+     "{"
+    ],
+    [
+     "RBRACE",
+     "}"
+    ],
+    [
+     "COMMA",
+     ","
+    ],
+    [
+     "SEMI",
+     ";"
+    ],
+    [
+     "COLON",
+     ":"
+    ]
+   ]
+  },
+  {
+   "name": "все операторы через пробел",
+   "input": "+ - * / == != <= >= < > =",
+   "negative": false,
+   "expect": [
+    [
+     "PLUS",
+     "+"
+    ],
+    [
+     "MINUS",
+     "-"
+    ],
+    [
+     "STAR",
+     "*"
+    ],
+    [
+     "SLASH",
+     "/"
+    ],
+    [
+     "EQ",
+     "=="
+    ],
+    [
+     "NE",
+     "!="
+    ],
+    [
+     "LE",
+     "<="
+    ],
+    [
+     "GE",
+     ">="
+    ],
+    [
+     "LT",
+     "<"
+    ],
+    [
+     "GT",
+     ">"
+    ],
+    [
+     "ASSIGN",
+     "="
+    ]
+   ]
+  },
+  {
+   "name": "a==b",
+   "input": "a==b",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "a"
+    ],
+    [
+     "EQ",
+     "=="
+    ],
+    [
+     "IDENT",
+     "b"
+    ]
+   ]
+  },
+  {
+   "name": "=== → EQ ASSIGN",
+   "input": "===",
+   "negative": false,
+   "expect": [
+    [
+     "EQ",
+     "=="
+    ],
+    [
+     "ASSIGN",
+     "="
+    ]
+   ]
+  },
+  {
+   "name": "<== → LE ASSIGN",
+   "input": "<==",
+   "negative": false,
+   "expect": [
+    [
+     "LE",
+     "<="
+    ],
+    [
+     "ASSIGN",
+     "="
+    ]
+   ]
+  },
+  {
+   "name": ">=> → GE GT",
+   "input": ">=>",
+   "negative": false,
+   "expect": [
+    [
+     "GE",
+     ">="
+    ],
+    [
+     "GT",
+     ">"
+    ]
+   ]
+  },
+  {
+   "name": "!== → NE ASSIGN",
+   "input": "!==",
+   "negative": false,
+   "expect": [
+    [
+     "NE",
+     "!="
+    ],
+    [
+     "ASSIGN",
+     "="
+    ]
+   ]
+  },
+  {
+   "name": "= = (не EQ)",
+   "input": "= =",
+   "negative": false,
+   "expect": [
+    [
+     "ASSIGN",
+     "="
+    ],
+    [
+     "ASSIGN",
+     "="
+    ]
+   ]
+  },
+  {
+   "name": "< = (не LE)",
+   "input": "< =",
+   "negative": false,
+   "expect": [
+    [
+     "LT",
+     "<"
+    ],
+    [
+     "ASSIGN",
+     "="
+    ]
+   ]
+  },
+  {
+   "name": "x=-1",
+   "input": "x=-1",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "x"
+    ],
+    [
+     "ASSIGN",
+     "="
+    ],
+    [
+     "MINUS",
+     "-"
+    ],
+    [
+     "INT",
+     "1"
+    ]
+   ]
+  },
+  {
+   "name": "a<=b>=c",
+   "input": "a<=b>=c",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "a"
+    ],
+    [
+     "LE",
+     "<="
+    ],
+    [
+     "IDENT",
+     "b"
+    ],
+    [
+     "GE",
+     ">="
+    ],
+    [
+     "IDENT",
+     "c"
+    ]
+   ]
+  },
+  {
+   "name": "деление a/b",
+   "input": "a/b",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "a"
+    ],
+    [
+     "SLASH",
+     "/"
+    ],
+    [
+     "IDENT",
+     "b"
+    ]
+   ]
+  },
+  {
+   "name": "/ / — не комментарий",
+   "input": "/ /",
+   "negative": false,
+   "expect": [
+    [
+     "SLASH",
+     "/"
+    ],
+    [
+     "SLASH",
+     "/"
+    ]
+   ]
+  },
+  {
+   "name": "/* — нет блочных комментариев",
+   "input": "/*x*/",
+   "negative": false,
+   "expect": [
+    [
+     "SLASH",
+     "/"
+    ],
+    [
+     "STAR",
+     "*"
+    ],
+    [
+     "IDENT",
+     "x"
+    ],
+    [
+     "STAR",
+     "*"
+    ],
+    [
+     "SLASH",
+     "/"
+    ]
+   ]
+  },
+  {
+   "name": "пустой комментарий",
+   "input": "//",
+   "negative": false,
+   "expect": []
+  },
+  {
+   "name": "комментарий",
+   "input": "// hello, world == 01 !@#",
+   "negative": false,
+   "expect": []
+  },
+  {
+   "name": "/// тоже комментарий",
+   "input": "///",
+   "negative": false,
+   "expect": []
+  },
+  {
+   "name": "комментарий до LF",
+   "input": "x // c\ny",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "x"
+    ],
+    [
+     "IDENT",
+     "y"
+    ]
+   ]
+  },
+  {
+   "name": "комментарий до CRLF",
+   "input": "// c\r\nx",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "x"
+    ]
+   ]
+  },
+  {
+   "name": "a//b",
+   "input": "a//b",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "a"
+    ]
+   ]
+  },
+  {
+   "name": "два комментария подряд",
+   "input": "//a\n//b\n",
+   "negative": false,
+   "expect": []
+  },
+  {
+   "name": "ключевое слово в комментарии",
+   "input": "//function\nif",
+   "negative": false,
+   "expect": [
+    [
+     "KW_IF",
+     "if"
+    ]
+   ]
+  },
+  {
+   "name": "программа целиком (CRLF)",
+   "input": "function f(a, n) returns r {\r\n  i = 0; // counter\r\n  while (i < length(a)) invariant i <= n { i = i + 1; }\r\n  assert r != 0;\r\n  assume n >= 0;\r\n}\r\n",
+   "negative": false,
+   "expect": [
+    [
+     "KW_FUNCTION",
+     "function"
+    ],
+    [
+     "IDENT",
+     "f"
+    ],
+    [
+     "LPAREN",
+     "("
+    ],
+    [
+     "IDENT",
+     "a"
+    ],
+    [
+     "COMMA",
+     ","
+    ],
+    [
+     "IDENT",
+     "n"
+    ],
+    [
+     "RPAREN",
+     ")"
+    ],
+    [
+     "KW_RETURNS",
+     "returns"
+    ],
+    [
+     "IDENT",
+     "r"
+    ],
+    [
+     "LBRACE",
+     "{"
+    ],
+    [
+     "IDENT",
+     "i"
+    ],
+    [
+     "ASSIGN",
+     "="
+    ],
+    [
+     "INT",
+     "0"
+    ],
+    [
+     "SEMI",
+     ";"
+    ],
+    [
+     "KW_WHILE",
+     "while"
+    ],
+    [
+     "LPAREN",
+     "("
+    ],
+    [
+     "IDENT",
+     "i"
+    ],
+    [
+     "LT",
+     "<"
+    ],
+    [
+     "KW_LENGTH",
+     "length"
+    ],
+    [
+     "LPAREN",
+     "("
+    ],
+    [
+     "IDENT",
+     "a"
+    ],
+    [
+     "RPAREN",
+     ")"
+    ],
+    [
+     "RPAREN",
+     ")"
+    ],
+    [
+     "KW_INVARIANT",
+     "invariant"
+    ],
+    [
+     "IDENT",
+     "i"
+    ],
+    [
+     "LE",
+     "<="
+    ],
+    [
+     "IDENT",
+     "n"
+    ],
+    [
+     "LBRACE",
+     "{"
+    ],
+    [
+     "IDENT",
+     "i"
+    ],
+    [
+     "ASSIGN",
+     "="
+    ],
+    [
+     "IDENT",
+     "i"
+    ],
+    [
+     "PLUS",
+     "+"
+    ],
+    [
+     "INT",
+     "1"
+    ],
+    [
+     "SEMI",
+     ";"
+    ],
+    [
+     "RBRACE",
+     "}"
+    ],
+    [
+     "KW_ASSERT",
+     "assert"
+    ],
+    [
+     "IDENT",
+     "r"
+    ],
+    [
+     "NE",
+     "!="
+    ],
+    [
+     "INT",
+     "0"
+    ],
+    [
+     "SEMI",
+     ";"
+    ],
+    [
+     "KW_ASSUME",
+     "assume"
+    ],
+    [
+     "IDENT",
+     "n"
+    ],
+    [
+     "GE",
+     ">="
+    ],
+    [
+     "INT",
+     "0"
+    ],
+    [
+     "SEMI",
+     ";"
+    ],
+    [
+     "RBRACE",
+     "}"
+    ]
+   ]
+  },
+  {
+   "name": "if/else с массивами",
+   "input": "if (a[0] == 1) { r = a[0]; } else { r = -1; }",
+   "negative": false,
+   "expect": [
+    [
+     "KW_IF",
+     "if"
+    ],
+    [
+     "LPAREN",
+     "("
+    ],
+    [
+     "IDENT",
+     "a"
+    ],
+    [
+     "LBRACKET",
+     "["
+    ],
+    [
+     "INT",
+     "0"
+    ],
+    [
+     "RBRACKET",
+     "]"
+    ],
+    [
+     "EQ",
+     "=="
+    ],
+    [
+     "INT",
+     "1"
+    ],
+    [
+     "RPAREN",
+     ")"
+    ],
+    [
+     "LBRACE",
+     "{"
+    ],
+    [
+     "IDENT",
+     "r"
+    ],
+    [
+     "ASSIGN",
+     "="
+    ],
+    [
+     "IDENT",
+     "a"
+    ],
+    [
+     "LBRACKET",
+     "["
+    ],
+    [
+     "INT",
+     "0"
+    ],
+    [
+     "RBRACKET",
+     "]"
+    ],
+    [
+     "SEMI",
+     ";"
+    ],
+    [
+     "RBRACE",
+     "}"
+    ],
+    [
+     "KW_ELSE",
+     "else"
+    ],
+    [
+     "LBRACE",
+     "{"
+    ],
+    [
+     "IDENT",
+     "r"
+    ],
+    [
+     "ASSIGN",
+     "="
+    ],
+    [
+     "MINUS",
+     "-"
+    ],
+    [
+     "INT",
+     "1"
+    ],
+    [
+     "SEMI",
+     ";"
+    ],
+    [
+     "RBRACE",
+     "}"
+    ]
+   ]
+  },
+  {
+   "name": "сигнатура с типами",
+   "input": "function g(x: int) returns (y: int)",
+   "negative": false,
+   "expect": [
+    [
+     "KW_FUNCTION",
+     "function"
+    ],
+    [
+     "IDENT",
+     "g"
+    ],
+    [
+     "LPAREN",
+     "("
+    ],
+    [
+     "IDENT",
+     "x"
+    ],
+    [
+     "COLON",
+     ":"
+    ],
+    [
+     "IDENT",
+     "int"
+    ],
+    [
+     "RPAREN",
+     ")"
+    ],
+    [
+     "KW_RETURNS",
+     "returns"
+    ],
+    [
+     "LPAREN",
+     "("
+    ],
+    [
+     "IDENT",
+     "y"
+    ],
+    [
+     "COLON",
+     ":"
+    ],
+    [
+     "IDENT",
+     "int"
+    ],
+    [
+     "RPAREN",
+     ")"
+    ]
+   ]
+  },
+  {
+   "name": "! без =",
+   "input": "!",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "!"
+    ]
+   ]
+  },
+  {
+   "name": "!x",
+   "input": "!x",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "!"
+    ],
+    [
+     "IDENT",
+     "x"
+    ]
+   ]
+  },
+  {
+   "name": "a & b",
+   "input": "a & b",
+   "negative": true,
+   "expect": [
+    [
+     "IDENT",
+     "a"
+    ],
+    [
+     "TRAP",
+     "&"
+    ],
+    [
+     "IDENT",
+     "b"
+    ]
+   ]
+  },
+  {
+   "name": "|| не оператор",
+   "input": "a||b",
+   "negative": true,
+   "expect": [
+    [
+     "IDENT",
+     "a"
+    ],
+    [
+     "TRAP",
+     "|"
+    ],
+    [
+     "TRAP",
+     "|"
+    ],
+    [
+     "IDENT",
+     "b"
+    ]
+   ]
+  },
+  {
+   "name": "строковый литерал",
+   "input": "\"s\"",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "\""
+    ],
+    [
+     "IDENT",
+     "s"
+    ],
+    [
+     "TRAP",
+     "\""
+    ]
+   ]
+  },
+  {
+   "name": "NUL",
+   "input": "\u0000",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "\u0000"
+    ]
+   ]
+  },
+  {
+   "name": "DEL (0x7F)",
+   "input": "",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     ""
+    ]
+   ]
+  },
+  {
+   "name": "вертикальный таб не WS",
+   "input": "a\u000bb",
+   "negative": true,
+   "expect": [
+    [
+     "IDENT",
+     "a"
+    ],
+    [
+     "TRAP",
+     "\u000b"
+    ],
+    [
+     "IDENT",
+     "b"
+    ]
+   ]
+  },
+  {
+   "name": "form feed не WS",
+   "input": "\f",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "\f"
+    ]
+   ]
+  },
+  {
+   "name": "non-ASCII: é",
+   "input": "é",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "é"
+    ]
+   ]
+  },
+  {
+   "name": "non-ASCII: кириллица",
+   "input": "да",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "д"
+    ],
+    [
+     "TRAP",
+     "а"
+    ]
+   ]
+  },
+  {
+   "name": "non-ASCII внутри идентификатора",
+   "input": "caféx",
+   "negative": true,
+   "expect": [
+    [
+     "IDENT",
+     "caf"
+    ],
+    [
+     "TRAP",
+     "é"
+    ],
+    [
+     "IDENT",
+     "x"
+    ]
+   ]
+  },
+  {
+    "name": "Проверка идентификаторов и операторов из теста",
+    "input": "x9 _a 9x a! == = <= ! === =<",
+    "expect": [
+      ["IDENT", "x9"],
+      ["IDENT", "_a"],
+      ["INT", "9"],
+      ["IDENT", "x"],
+      ["IDENT", "a"],
+      ["TRAP", "!"],
+      ["EQ", "=="],
+      ["ASSIGN", "="],
+      ["LE", "<="],
+      ["TRAP", "!"],
+      ["EQ", "=="],
+      ["ASSIGN", "="],
+      ["ASSIGN", "="],
+      ["LT", "<"]
+    ],
+    "negative": true
+  },
+  {
+   "name": "NBSP между токенами",
+   "input": "x y",
+   "negative": true,
+   "expect": [
+    [
+     "IDENT",
+     "x"
+    ],
+    [
+     "TRAP",
+     " "
+    ],
+    [
+     "IDENT",
+     "y"
+    ]
+   ]
+  },
+  {
+   "name": "emoji",
+   "input": "a😀",
+   "negative": true,
+   "expect": [
+    [
+     "IDENT",
+     "a"
+    ],
+    [
+     "TRAP",
+     "😀"
+    ]
+   ]
+  },
+  {
+   "name": "non-ASCII в комментарии",
+   "input": "// é",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "é"
+    ]
+   ]
+  },
+  {
+   "name": "fullwidth цифра",
+   "input": "１",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "１"
+    ]
+   ]
+  },
+  {
+   "name": "несколько ошибок подряд",
+   "input": "01 ! é",
+   "negative": true,
+   "expect": [
+    [
+     "INT_LEADING_ZERO",
+     "01"
+    ],
+    [
+     "TRAP",
+     "!"
+    ],
+    [
+     "TRAP",
+     "é"
+    ]
+   ]
+  }
+ ],
+ "ascii_coverage": {
+  "IDENT": "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz_",
+  "INT": "0123456789",
+  "@skip": " \t\r\n",
+  "LT": "<",
+  "GT": ">",
+  "ASSIGN": "=",
+  "PLUS": "+",
+  "MINUS": "-",
+  "STAR": "*",
+  "SLASH": "/",
+  "LPAREN": "(",
+  "RPAREN": ")",
+  "LBRACKET": "[",
+  "RBRACKET": "]",
+  "LBRACE": "{",
+  "RBRACE": "}",
+  "COMMA": ",",
+  "SEMI": ";",
+  "COLON": ":",
+  "@default": "TRAP"
+ }
+}

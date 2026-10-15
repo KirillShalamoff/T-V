@@ -1,0 +1,5730 @@
+{
+ "passed": 221,
+ "total": 221,
+ "results": [
+  {
+   "name": "пустая строка",
+   "group": "manual",
+   "input": "",
+   "negative": false,
+   "expect": [],
+   "got": [],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "только пробелы",
+   "group": "manual",
+   "input": "     ",
+   "negative": false,
+   "expect": [],
+   "got": [],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "только табы",
+   "group": "manual",
+   "input": "\t\t\t",
+   "negative": false,
+   "expect": [],
+   "got": [],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "только CRLF",
+   "group": "manual",
+   "input": "\r\n\r\n",
+   "negative": false,
+   "expect": [],
+   "got": [],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "одиночный CR",
+   "group": "manual",
+   "input": "\r",
+   "negative": false,
+   "expect": [],
+   "got": [],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "одиночный LF",
+   "group": "manual",
+   "input": "\n",
+   "negative": false,
+   "expect": [],
+   "got": [],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "смесь пробелов/табов/CRLF",
+   "group": "manual",
+   "input": " \t\r\n \t\n\r ",
+   "negative": false,
+   "expect": [],
+   "got": [],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "0",
+   "group": "manual",
+   "input": "0",
+   "negative": false,
+   "expect": [
+    [
+     "INT",
+     "0"
+    ]
+   ],
+   "got": [
+    [
+     "INT",
+     "0"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "однозначное",
+   "group": "manual",
+   "input": "7",
+   "negative": false,
+   "expect": [
+    [
+     "INT",
+     "7"
+    ]
+   ],
+   "got": [
+    [
+     "INT",
+     "7"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "многозначное",
+   "group": "manual",
+   "input": "1234567890",
+   "negative": false,
+   "expect": [
+    [
+     "INT",
+     "1234567890"
+    ]
+   ],
+   "got": [
+    [
+     "INT",
+     "1234567890"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "с нулями внутри",
+   "group": "manual",
+   "input": "100500",
+   "negative": false,
+   "expect": [
+    [
+     "INT",
+     "100500"
+    ]
+   ],
+   "got": [
+    [
+     "INT",
+     "100500"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "два нуля через пробел",
+   "group": "manual",
+   "input": "0 0",
+   "negative": false,
+   "expect": [
+    [
+     "INT",
+     "0"
+    ],
+    [
+     "INT",
+     "0"
+    ]
+   ],
+   "got": [
+    [
+     "INT",
+     "0"
+    ],
+    [
+     "INT",
+     "0"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "число+идент без пробела",
+   "group": "manual",
+   "input": "1abc",
+   "negative": false,
+   "expect": [
+    [
+     "INT",
+     "1"
+    ],
+    [
+     "IDENT",
+     "abc"
+    ]
+   ],
+   "got": [
+    [
+     "INT",
+     "1"
+    ],
+    [
+     "IDENT",
+     "abc"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "00 (ведущий ноль)",
+   "group": "manual",
+   "input": "00",
+   "negative": true,
+   "expect": [
+    [
+     "INT_LEADING_ZERO",
+     "00"
+    ]
+   ],
+   "got": [
+    [
+     "INT_LEADING_ZERO",
+     "00"
+    ]
+   ],
+   "errors": [
+    "недопустимая лексема '00' (INT_LEADING_ZERO)"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "01 (ведущий ноль)",
+   "group": "manual",
+   "input": "01",
+   "negative": true,
+   "expect": [
+    [
+     "INT_LEADING_ZERO",
+     "01"
+    ]
+   ],
+   "got": [
+    [
+     "INT_LEADING_ZERO",
+     "01"
+    ]
+   ],
+   "errors": [
+    "недопустимая лексема '01' (INT_LEADING_ZERO)"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "007 (ведущий ноль)",
+   "group": "manual",
+   "input": "007",
+   "negative": true,
+   "expect": [
+    [
+     "INT_LEADING_ZERO",
+     "007"
+    ]
+   ],
+   "got": [
+    [
+     "INT_LEADING_ZERO",
+     "007"
+    ]
+   ],
+   "errors": [
+    "недопустимая лексема '007' (INT_LEADING_ZERO)"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ведущий ноль в выражении",
+   "group": "manual",
+   "input": "x = 012;",
+   "negative": true,
+   "expect": [
+    [
+     "IDENT",
+     "x"
+    ],
+    [
+     "ASSIGN",
+     "="
+    ],
+    [
+     "INT_LEADING_ZERO",
+     "012"
+    ],
+    [
+     "SEMI",
+     ";"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "x"
+    ],
+    [
+     "ASSIGN",
+     "="
+    ],
+    [
+     "INT_LEADING_ZERO",
+     "012"
+    ],
+    [
+     "SEMI",
+     ";"
+    ]
+   ],
+   "errors": [
+    "недопустимая лексема '012' (INT_LEADING_ZERO)"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "дробь не поддерживается",
+   "group": "manual",
+   "input": "1.5",
+   "negative": true,
+   "expect": [
+    [
+     "INT",
+     "1"
+    ],
+    [
+     "TRAP",
+     "."
+    ],
+    [
+     "INT",
+     "5"
+    ]
+   ],
+   "got": [
+    [
+     "INT",
+     "1"
+    ],
+    [
+     "TRAP",
+     "."
+    ],
+    [
+     "INT",
+     "5"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '.' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "одна буква",
+   "group": "manual",
+   "input": "x",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "x"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "x"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "одно подчёркивание",
+   "group": "manual",
+   "input": "_",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "_"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "_"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "много подчёркиваний",
+   "group": "manual",
+   "input": "___",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "___"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "___"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "_ в начале",
+   "group": "manual",
+   "input": "_foo",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "_foo"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "_foo"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "_ в середине",
+   "group": "manual",
+   "input": "foo_bar",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "foo_bar"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "foo_bar"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "_ в конце",
+   "group": "manual",
+   "input": "foo_",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "foo_"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "foo_"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "__init__",
+   "group": "manual",
+   "input": "__init__",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "__init__"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "__init__"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "_ и цифры",
+   "group": "manual",
+   "input": "_1a_2",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "_1a_2"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "_1a_2"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "заглавные",
+   "group": "manual",
+   "input": "CamelCase_X9",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "CamelCase_X9"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "CamelCase_X9"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ключевое слово function",
+   "group": "manual",
+   "input": "function",
+   "negative": false,
+   "expect": [
+    [
+     "KW_FUNCTION",
+     "function"
+    ]
+   ],
+   "got": [
+    [
+     "KW_FUNCTION",
+     "function"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ключевое слово returns",
+   "group": "manual",
+   "input": "returns",
+   "negative": false,
+   "expect": [
+    [
+     "KW_RETURNS",
+     "returns"
+    ]
+   ],
+   "got": [
+    [
+     "KW_RETURNS",
+     "returns"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ключевое слово while",
+   "group": "manual",
+   "input": "while",
+   "negative": false,
+   "expect": [
+    [
+     "KW_WHILE",
+     "while"
+    ]
+   ],
+   "got": [
+    [
+     "KW_WHILE",
+     "while"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ключевое слово if",
+   "group": "manual",
+   "input": "if",
+   "negative": false,
+   "expect": [
+    [
+     "KW_IF",
+     "if"
+    ]
+   ],
+   "got": [
+    [
+     "KW_IF",
+     "if"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ключевое слово else",
+   "group": "manual",
+   "input": "else",
+   "negative": false,
+   "expect": [
+    [
+     "KW_ELSE",
+     "else"
+    ]
+   ],
+   "got": [
+    [
+     "KW_ELSE",
+     "else"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ключевое слово assert",
+   "group": "manual",
+   "input": "assert",
+   "negative": false,
+   "expect": [
+    [
+     "KW_ASSERT",
+     "assert"
+    ]
+   ],
+   "got": [
+    [
+     "KW_ASSERT",
+     "assert"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ключевое слово assume",
+   "group": "manual",
+   "input": "assume",
+   "negative": false,
+   "expect": [
+    [
+     "KW_ASSUME",
+     "assume"
+    ]
+   ],
+   "got": [
+    [
+     "KW_ASSUME",
+     "assume"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ключевое слово invariant",
+   "group": "manual",
+   "input": "invariant",
+   "negative": false,
+   "expect": [
+    [
+     "KW_INVARIANT",
+     "invariant"
+    ]
+   ],
+   "got": [
+    [
+     "KW_INVARIANT",
+     "invariant"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ключевое слово length",
+   "group": "manual",
+   "input": "length",
+   "negative": false,
+   "expect": [
+    [
+     "KW_LENGTH",
+     "length"
+    ]
+   ],
+   "got": [
+    [
+     "KW_LENGTH",
+     "length"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "functions",
+   "group": "manual",
+   "input": "functions",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "functions"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "functions"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "func (префикс)",
+   "group": "manual",
+   "input": "func",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "func"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "func"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "iff",
+   "group": "manual",
+   "input": "iff",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "iff"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "iff"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "if_",
+   "group": "manual",
+   "input": "if_",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "if_"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "if_"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "_if",
+   "group": "manual",
+   "input": "_if",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "_if"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "_if"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "if1",
+   "group": "manual",
+   "input": "if1",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "if1"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "if1"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "elseif",
+   "group": "manual",
+   "input": "elseif",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "elseif"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "elseif"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "lengthy",
+   "group": "manual",
+   "input": "lengthy",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "lengthy"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "lengthy"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "assum (префикс)",
+   "group": "manual",
+   "input": "assum",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "assum"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "assum"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "invariants",
+   "group": "manual",
+   "input": "invariants",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "invariants"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "invariants"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "регистр важен: Function",
+   "group": "manual",
+   "input": "Function",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "Function"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "Function"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "регистр важен: IF",
+   "group": "manual",
+   "input": "IF",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "IF"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "IF"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "if else",
+   "group": "manual",
+   "input": "if else",
+   "negative": false,
+   "expect": [
+    [
+     "KW_IF",
+     "if"
+    ],
+    [
+     "KW_ELSE",
+     "else"
+    ]
+   ],
+   "got": [
+    [
+     "KW_IF",
+     "if"
+    ],
+    [
+     "KW_ELSE",
+     "else"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ключевые слова через CRLF",
+   "group": "manual",
+   "input": "while\r\nassert\tassume",
+   "negative": false,
+   "expect": [
+    [
+     "KW_WHILE",
+     "while"
+    ],
+    [
+     "KW_ASSERT",
+     "assert"
+    ],
+    [
+     "KW_ASSUME",
+     "assume"
+    ]
+   ],
+   "got": [
+    [
+     "KW_WHILE",
+     "while"
+    ],
+    [
+     "KW_ASSERT",
+     "assert"
+    ],
+    [
+     "KW_ASSUME",
+     "assume"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "все разделители слитно",
+   "group": "manual",
+   "input": "()[]{},;:",
+   "negative": false,
+   "expect": [
+    [
+     "LPAREN",
+     "("
+    ],
+    [
+     "RPAREN",
+     ")"
+    ],
+    [
+     "LBRACKET",
+     "["
+    ],
+    [
+     "RBRACKET",
+     "]"
+    ],
+    [
+     "LBRACE",
+     "{"
+    ],
+    [
+     "RBRACE",
+     "}"
+    ],
+    [
+     "COMMA",
+     ","
+    ],
+    [
+     "SEMI",
+     ";"
+    ],
+    [
+     "COLON",
+     ":"
+    ]
+   ],
+   "got": [
+    [
+     "LPAREN",
+     "("
+    ],
+    [
+     "RPAREN",
+     ")"
+    ],
+    [
+     "LBRACKET",
+     "["
+    ],
+    [
+     "RBRACKET",
+     "]"
+    ],
+    [
+     "LBRACE",
+     "{"
+    ],
+    [
+     "RBRACE",
+     "}"
+    ],
+    [
+     "COMMA",
+     ","
+    ],
+    [
+     "SEMI",
+     ";"
+    ],
+    [
+     "COLON",
+     ":"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "все операторы через пробел",
+   "group": "manual",
+   "input": "+ - * / == != <= >= < > =",
+   "negative": false,
+   "expect": [
+    [
+     "PLUS",
+     "+"
+    ],
+    [
+     "MINUS",
+     "-"
+    ],
+    [
+     "STAR",
+     "*"
+    ],
+    [
+     "SLASH",
+     "/"
+    ],
+    [
+     "EQ",
+     "=="
+    ],
+    [
+     "NE",
+     "!="
+    ],
+    [
+     "LE",
+     "<="
+    ],
+    [
+     "GE",
+     ">="
+    ],
+    [
+     "LT",
+     "<"
+    ],
+    [
+     "GT",
+     ">"
+    ],
+    [
+     "ASSIGN",
+     "="
+    ]
+   ],
+   "got": [
+    [
+     "PLUS",
+     "+"
+    ],
+    [
+     "MINUS",
+     "-"
+    ],
+    [
+     "STAR",
+     "*"
+    ],
+    [
+     "SLASH",
+     "/"
+    ],
+    [
+     "EQ",
+     "=="
+    ],
+    [
+     "NE",
+     "!="
+    ],
+    [
+     "LE",
+     "<="
+    ],
+    [
+     "GE",
+     ">="
+    ],
+    [
+     "LT",
+     "<"
+    ],
+    [
+     "GT",
+     ">"
+    ],
+    [
+     "ASSIGN",
+     "="
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "a==b",
+   "group": "manual",
+   "input": "a==b",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "a"
+    ],
+    [
+     "EQ",
+     "=="
+    ],
+    [
+     "IDENT",
+     "b"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "a"
+    ],
+    [
+     "EQ",
+     "=="
+    ],
+    [
+     "IDENT",
+     "b"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "=== → EQ ASSIGN",
+   "group": "manual",
+   "input": "===",
+   "negative": false,
+   "expect": [
+    [
+     "EQ",
+     "=="
+    ],
+    [
+     "ASSIGN",
+     "="
+    ]
+   ],
+   "got": [
+    [
+     "EQ",
+     "=="
+    ],
+    [
+     "ASSIGN",
+     "="
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "<== → LE ASSIGN",
+   "group": "manual",
+   "input": "<==",
+   "negative": false,
+   "expect": [
+    [
+     "LE",
+     "<="
+    ],
+    [
+     "ASSIGN",
+     "="
+    ]
+   ],
+   "got": [
+    [
+     "LE",
+     "<="
+    ],
+    [
+     "ASSIGN",
+     "="
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": ">=> → GE GT",
+   "group": "manual",
+   "input": ">=>",
+   "negative": false,
+   "expect": [
+    [
+     "GE",
+     ">="
+    ],
+    [
+     "GT",
+     ">"
+    ]
+   ],
+   "got": [
+    [
+     "GE",
+     ">="
+    ],
+    [
+     "GT",
+     ">"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "!== → NE ASSIGN",
+   "group": "manual",
+   "input": "!==",
+   "negative": false,
+   "expect": [
+    [
+     "NE",
+     "!="
+    ],
+    [
+     "ASSIGN",
+     "="
+    ]
+   ],
+   "got": [
+    [
+     "NE",
+     "!="
+    ],
+    [
+     "ASSIGN",
+     "="
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "= = (не EQ)",
+   "group": "manual",
+   "input": "= =",
+   "negative": false,
+   "expect": [
+    [
+     "ASSIGN",
+     "="
+    ],
+    [
+     "ASSIGN",
+     "="
+    ]
+   ],
+   "got": [
+    [
+     "ASSIGN",
+     "="
+    ],
+    [
+     "ASSIGN",
+     "="
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "< = (не LE)",
+   "group": "manual",
+   "input": "< =",
+   "negative": false,
+   "expect": [
+    [
+     "LT",
+     "<"
+    ],
+    [
+     "ASSIGN",
+     "="
+    ]
+   ],
+   "got": [
+    [
+     "LT",
+     "<"
+    ],
+    [
+     "ASSIGN",
+     "="
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "x=-1",
+   "group": "manual",
+   "input": "x=-1",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "x"
+    ],
+    [
+     "ASSIGN",
+     "="
+    ],
+    [
+     "MINUS",
+     "-"
+    ],
+    [
+     "INT",
+     "1"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "x"
+    ],
+    [
+     "ASSIGN",
+     "="
+    ],
+    [
+     "MINUS",
+     "-"
+    ],
+    [
+     "INT",
+     "1"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "a<=b>=c",
+   "group": "manual",
+   "input": "a<=b>=c",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "a"
+    ],
+    [
+     "LE",
+     "<="
+    ],
+    [
+     "IDENT",
+     "b"
+    ],
+    [
+     "GE",
+     ">="
+    ],
+    [
+     "IDENT",
+     "c"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "a"
+    ],
+    [
+     "LE",
+     "<="
+    ],
+    [
+     "IDENT",
+     "b"
+    ],
+    [
+     "GE",
+     ">="
+    ],
+    [
+     "IDENT",
+     "c"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "деление a/b",
+   "group": "manual",
+   "input": "a/b",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "a"
+    ],
+    [
+     "SLASH",
+     "/"
+    ],
+    [
+     "IDENT",
+     "b"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "a"
+    ],
+    [
+     "SLASH",
+     "/"
+    ],
+    [
+     "IDENT",
+     "b"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "/ / — не комментарий",
+   "group": "manual",
+   "input": "/ /",
+   "negative": false,
+   "expect": [
+    [
+     "SLASH",
+     "/"
+    ],
+    [
+     "SLASH",
+     "/"
+    ]
+   ],
+   "got": [
+    [
+     "SLASH",
+     "/"
+    ],
+    [
+     "SLASH",
+     "/"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "/* — нет блочных комментариев",
+   "group": "manual",
+   "input": "/*x*/",
+   "negative": false,
+   "expect": [
+    [
+     "SLASH",
+     "/"
+    ],
+    [
+     "STAR",
+     "*"
+    ],
+    [
+     "IDENT",
+     "x"
+    ],
+    [
+     "STAR",
+     "*"
+    ],
+    [
+     "SLASH",
+     "/"
+    ]
+   ],
+   "got": [
+    [
+     "SLASH",
+     "/"
+    ],
+    [
+     "STAR",
+     "*"
+    ],
+    [
+     "IDENT",
+     "x"
+    ],
+    [
+     "STAR",
+     "*"
+    ],
+    [
+     "SLASH",
+     "/"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "пустой комментарий",
+   "group": "manual",
+   "input": "//",
+   "negative": false,
+   "expect": [],
+   "got": [],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "комментарий",
+   "group": "manual",
+   "input": "// hello, world == 01 !@#",
+   "negative": false,
+   "expect": [],
+   "got": [],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "/// тоже комментарий",
+   "group": "manual",
+   "input": "///",
+   "negative": false,
+   "expect": [],
+   "got": [],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "комментарий до LF",
+   "group": "manual",
+   "input": "x // c\ny",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "x"
+    ],
+    [
+     "IDENT",
+     "y"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "x"
+    ],
+    [
+     "IDENT",
+     "y"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "комментарий до CRLF",
+   "group": "manual",
+   "input": "// c\r\nx",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "x"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "x"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "a//b",
+   "group": "manual",
+   "input": "a//b",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "a"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "a"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "два комментария подряд",
+   "group": "manual",
+   "input": "//a\n//b\n",
+   "negative": false,
+   "expect": [],
+   "got": [],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ключевое слово в комментарии",
+   "group": "manual",
+   "input": "//function\nif",
+   "negative": false,
+   "expect": [
+    [
+     "KW_IF",
+     "if"
+    ]
+   ],
+   "got": [
+    [
+     "KW_IF",
+     "if"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "программа целиком (CRLF)",
+   "group": "manual",
+   "input": "function f(a, n) returns r {\r\n  i = 0; // counter\r\n  while (i < length(a)) invariant i <= n { i = i + 1; }\r\n  assert r != 0;\r\n  assume n >= 0;\r\n}\r\n",
+   "negative": false,
+   "expect": [
+    [
+     "KW_FUNCTION",
+     "function"
+    ],
+    [
+     "IDENT",
+     "f"
+    ],
+    [
+     "LPAREN",
+     "("
+    ],
+    [
+     "IDENT",
+     "a"
+    ],
+    [
+     "COMMA",
+     ","
+    ],
+    [
+     "IDENT",
+     "n"
+    ],
+    [
+     "RPAREN",
+     ")"
+    ],
+    [
+     "KW_RETURNS",
+     "returns"
+    ],
+    [
+     "IDENT",
+     "r"
+    ],
+    [
+     "LBRACE",
+     "{"
+    ],
+    [
+     "IDENT",
+     "i"
+    ],
+    [
+     "ASSIGN",
+     "="
+    ],
+    [
+     "INT",
+     "0"
+    ],
+    [
+     "SEMI",
+     ";"
+    ],
+    [
+     "KW_WHILE",
+     "while"
+    ],
+    [
+     "LPAREN",
+     "("
+    ],
+    [
+     "IDENT",
+     "i"
+    ],
+    [
+     "LT",
+     "<"
+    ],
+    [
+     "KW_LENGTH",
+     "length"
+    ],
+    [
+     "LPAREN",
+     "("
+    ],
+    [
+     "IDENT",
+     "a"
+    ],
+    [
+     "RPAREN",
+     ")"
+    ],
+    [
+     "RPAREN",
+     ")"
+    ],
+    [
+     "KW_INVARIANT",
+     "invariant"
+    ],
+    [
+     "IDENT",
+     "i"
+    ],
+    [
+     "LE",
+     "<="
+    ],
+    [
+     "IDENT",
+     "n"
+    ],
+    [
+     "LBRACE",
+     "{"
+    ],
+    [
+     "IDENT",
+     "i"
+    ],
+    [
+     "ASSIGN",
+     "="
+    ],
+    [
+     "IDENT",
+     "i"
+    ],
+    [
+     "PLUS",
+     "+"
+    ],
+    [
+     "INT",
+     "1"
+    ],
+    [
+     "SEMI",
+     ";"
+    ],
+    [
+     "RBRACE",
+     "}"
+    ],
+    [
+     "KW_ASSERT",
+     "assert"
+    ],
+    [
+     "IDENT",
+     "r"
+    ],
+    [
+     "NE",
+     "!="
+    ],
+    [
+     "INT",
+     "0"
+    ],
+    [
+     "SEMI",
+     ";"
+    ],
+    [
+     "KW_ASSUME",
+     "assume"
+    ],
+    [
+     "IDENT",
+     "n"
+    ],
+    [
+     "GE",
+     ">="
+    ],
+    [
+     "INT",
+     "0"
+    ],
+    [
+     "SEMI",
+     ";"
+    ],
+    [
+     "RBRACE",
+     "}"
+    ]
+   ],
+   "got": [
+    [
+     "KW_FUNCTION",
+     "function"
+    ],
+    [
+     "IDENT",
+     "f"
+    ],
+    [
+     "LPAREN",
+     "("
+    ],
+    [
+     "IDENT",
+     "a"
+    ],
+    [
+     "COMMA",
+     ","
+    ],
+    [
+     "IDENT",
+     "n"
+    ],
+    [
+     "RPAREN",
+     ")"
+    ],
+    [
+     "KW_RETURNS",
+     "returns"
+    ],
+    [
+     "IDENT",
+     "r"
+    ],
+    [
+     "LBRACE",
+     "{"
+    ],
+    [
+     "IDENT",
+     "i"
+    ],
+    [
+     "ASSIGN",
+     "="
+    ],
+    [
+     "INT",
+     "0"
+    ],
+    [
+     "SEMI",
+     ";"
+    ],
+    [
+     "KW_WHILE",
+     "while"
+    ],
+    [
+     "LPAREN",
+     "("
+    ],
+    [
+     "IDENT",
+     "i"
+    ],
+    [
+     "LT",
+     "<"
+    ],
+    [
+     "KW_LENGTH",
+     "length"
+    ],
+    [
+     "LPAREN",
+     "("
+    ],
+    [
+     "IDENT",
+     "a"
+    ],
+    [
+     "RPAREN",
+     ")"
+    ],
+    [
+     "RPAREN",
+     ")"
+    ],
+    [
+     "KW_INVARIANT",
+     "invariant"
+    ],
+    [
+     "IDENT",
+     "i"
+    ],
+    [
+     "LE",
+     "<="
+    ],
+    [
+     "IDENT",
+     "n"
+    ],
+    [
+     "LBRACE",
+     "{"
+    ],
+    [
+     "IDENT",
+     "i"
+    ],
+    [
+     "ASSIGN",
+     "="
+    ],
+    [
+     "IDENT",
+     "i"
+    ],
+    [
+     "PLUS",
+     "+"
+    ],
+    [
+     "INT",
+     "1"
+    ],
+    [
+     "SEMI",
+     ";"
+    ],
+    [
+     "RBRACE",
+     "}"
+    ],
+    [
+     "KW_ASSERT",
+     "assert"
+    ],
+    [
+     "IDENT",
+     "r"
+    ],
+    [
+     "NE",
+     "!="
+    ],
+    [
+     "INT",
+     "0"
+    ],
+    [
+     "SEMI",
+     ";"
+    ],
+    [
+     "KW_ASSUME",
+     "assume"
+    ],
+    [
+     "IDENT",
+     "n"
+    ],
+    [
+     "GE",
+     ">="
+    ],
+    [
+     "INT",
+     "0"
+    ],
+    [
+     "SEMI",
+     ";"
+    ],
+    [
+     "RBRACE",
+     "}"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "if/else с массивами",
+   "group": "manual",
+   "input": "if (a[0] == 1) { r = a[0]; } else { r = -1; }",
+   "negative": false,
+   "expect": [
+    [
+     "KW_IF",
+     "if"
+    ],
+    [
+     "LPAREN",
+     "("
+    ],
+    [
+     "IDENT",
+     "a"
+    ],
+    [
+     "LBRACKET",
+     "["
+    ],
+    [
+     "INT",
+     "0"
+    ],
+    [
+     "RBRACKET",
+     "]"
+    ],
+    [
+     "EQ",
+     "=="
+    ],
+    [
+     "INT",
+     "1"
+    ],
+    [
+     "RPAREN",
+     ")"
+    ],
+    [
+     "LBRACE",
+     "{"
+    ],
+    [
+     "IDENT",
+     "r"
+    ],
+    [
+     "ASSIGN",
+     "="
+    ],
+    [
+     "IDENT",
+     "a"
+    ],
+    [
+     "LBRACKET",
+     "["
+    ],
+    [
+     "INT",
+     "0"
+    ],
+    [
+     "RBRACKET",
+     "]"
+    ],
+    [
+     "SEMI",
+     ";"
+    ],
+    [
+     "RBRACE",
+     "}"
+    ],
+    [
+     "KW_ELSE",
+     "else"
+    ],
+    [
+     "LBRACE",
+     "{"
+    ],
+    [
+     "IDENT",
+     "r"
+    ],
+    [
+     "ASSIGN",
+     "="
+    ],
+    [
+     "MINUS",
+     "-"
+    ],
+    [
+     "INT",
+     "1"
+    ],
+    [
+     "SEMI",
+     ";"
+    ],
+    [
+     "RBRACE",
+     "}"
+    ]
+   ],
+   "got": [
+    [
+     "KW_IF",
+     "if"
+    ],
+    [
+     "LPAREN",
+     "("
+    ],
+    [
+     "IDENT",
+     "a"
+    ],
+    [
+     "LBRACKET",
+     "["
+    ],
+    [
+     "INT",
+     "0"
+    ],
+    [
+     "RBRACKET",
+     "]"
+    ],
+    [
+     "EQ",
+     "=="
+    ],
+    [
+     "INT",
+     "1"
+    ],
+    [
+     "RPAREN",
+     ")"
+    ],
+    [
+     "LBRACE",
+     "{"
+    ],
+    [
+     "IDENT",
+     "r"
+    ],
+    [
+     "ASSIGN",
+     "="
+    ],
+    [
+     "IDENT",
+     "a"
+    ],
+    [
+     "LBRACKET",
+     "["
+    ],
+    [
+     "INT",
+     "0"
+    ],
+    [
+     "RBRACKET",
+     "]"
+    ],
+    [
+     "SEMI",
+     ";"
+    ],
+    [
+     "RBRACE",
+     "}"
+    ],
+    [
+     "KW_ELSE",
+     "else"
+    ],
+    [
+     "LBRACE",
+     "{"
+    ],
+    [
+     "IDENT",
+     "r"
+    ],
+    [
+     "ASSIGN",
+     "="
+    ],
+    [
+     "MINUS",
+     "-"
+    ],
+    [
+     "INT",
+     "1"
+    ],
+    [
+     "SEMI",
+     ";"
+    ],
+    [
+     "RBRACE",
+     "}"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "сигнатура с типами",
+   "group": "manual",
+   "input": "function g(x: int) returns (y: int)",
+   "negative": false,
+   "expect": [
+    [
+     "KW_FUNCTION",
+     "function"
+    ],
+    [
+     "IDENT",
+     "g"
+    ],
+    [
+     "LPAREN",
+     "("
+    ],
+    [
+     "IDENT",
+     "x"
+    ],
+    [
+     "COLON",
+     ":"
+    ],
+    [
+     "IDENT",
+     "int"
+    ],
+    [
+     "RPAREN",
+     ")"
+    ],
+    [
+     "KW_RETURNS",
+     "returns"
+    ],
+    [
+     "LPAREN",
+     "("
+    ],
+    [
+     "IDENT",
+     "y"
+    ],
+    [
+     "COLON",
+     ":"
+    ],
+    [
+     "IDENT",
+     "int"
+    ],
+    [
+     "RPAREN",
+     ")"
+    ]
+   ],
+   "got": [
+    [
+     "KW_FUNCTION",
+     "function"
+    ],
+    [
+     "IDENT",
+     "g"
+    ],
+    [
+     "LPAREN",
+     "("
+    ],
+    [
+     "IDENT",
+     "x"
+    ],
+    [
+     "COLON",
+     ":"
+    ],
+    [
+     "IDENT",
+     "int"
+    ],
+    [
+     "RPAREN",
+     ")"
+    ],
+    [
+     "KW_RETURNS",
+     "returns"
+    ],
+    [
+     "LPAREN",
+     "("
+    ],
+    [
+     "IDENT",
+     "y"
+    ],
+    [
+     "COLON",
+     ":"
+    ],
+    [
+     "IDENT",
+     "int"
+    ],
+    [
+     "RPAREN",
+     ")"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "! без =",
+   "group": "manual",
+   "input": "!",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "!"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "!"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '!' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "!x",
+   "group": "manual",
+   "input": "!x",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "!"
+    ],
+    [
+     "IDENT",
+     "x"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "!"
+    ],
+    [
+     "IDENT",
+     "x"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '!' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "a & b",
+   "group": "manual",
+   "input": "a & b",
+   "negative": true,
+   "expect": [
+    [
+     "IDENT",
+     "a"
+    ],
+    [
+     "TRAP",
+     "&"
+    ],
+    [
+     "IDENT",
+     "b"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "a"
+    ],
+    [
+     "TRAP",
+     "&"
+    ],
+    [
+     "IDENT",
+     "b"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '&' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "|| не оператор",
+   "group": "manual",
+   "input": "a||b",
+   "negative": true,
+   "expect": [
+    [
+     "IDENT",
+     "a"
+    ],
+    [
+     "TRAP",
+     "|"
+    ],
+    [
+     "TRAP",
+     "|"
+    ],
+    [
+     "IDENT",
+     "b"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "a"
+    ],
+    [
+     "TRAP",
+     "|"
+    ],
+    [
+     "TRAP",
+     "|"
+    ],
+    [
+     "IDENT",
+     "b"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '|' → ловушка",
+    "нет перехода по символу '|' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "строковый литерал",
+   "group": "manual",
+   "input": "\"s\"",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "\""
+    ],
+    [
+     "IDENT",
+     "s"
+    ],
+    [
+     "TRAP",
+     "\""
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "\""
+    ],
+    [
+     "IDENT",
+     "s"
+    ],
+    [
+     "TRAP",
+     "\""
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '\"' → ловушка",
+    "нет перехода по символу '\"' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "NUL",
+   "group": "manual",
+   "input": "\u0000",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "\u0000"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "\u0000"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '\\x00' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "DEL (0x7F)",
+   "group": "manual",
+   "input": "",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     ""
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     ""
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '\\x7f' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "вертикальный таб не WS",
+   "group": "manual",
+   "input": "a\u000bb",
+   "negative": true,
+   "expect": [
+    [
+     "IDENT",
+     "a"
+    ],
+    [
+     "TRAP",
+     "\u000b"
+    ],
+    [
+     "IDENT",
+     "b"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "a"
+    ],
+    [
+     "TRAP",
+     "\u000b"
+    ],
+    [
+     "IDENT",
+     "b"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '\\x0b' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "form feed не WS",
+   "group": "manual",
+   "input": "\f",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "\f"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "\f"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '\\x0c' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "non-ASCII: é",
+   "group": "manual",
+   "input": "é",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "é"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "é"
+    ]
+   ],
+   "errors": [
+    "символ U+00E9 вне алфавита ASCII → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "non-ASCII: кириллица",
+   "group": "manual",
+   "input": "да",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "д"
+    ],
+    [
+     "TRAP",
+     "а"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "д"
+    ],
+    [
+     "TRAP",
+     "а"
+    ]
+   ],
+   "errors": [
+    "символ U+0434 вне алфавита ASCII → ловушка",
+    "символ U+0430 вне алфавита ASCII → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "non-ASCII внутри идентификатора",
+   "group": "manual",
+   "input": "caféx",
+   "negative": true,
+   "expect": [
+    [
+     "IDENT",
+     "caf"
+    ],
+    [
+     "TRAP",
+     "é"
+    ],
+    [
+     "IDENT",
+     "x"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "caf"
+    ],
+    [
+     "TRAP",
+     "é"
+    ],
+    [
+     "IDENT",
+     "x"
+    ]
+   ],
+   "errors": [
+    "символ U+00E9 вне алфавита ASCII → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "Проверка идентификаторов и операторов из теста",
+   "group": "manual",
+   "input": "x9 _a 9x a! == = <= ! === =<",
+   "negative": true,
+   "expect": [
+    [
+     "IDENT",
+     "x9"
+    ],
+    [
+     "IDENT",
+     "_a"
+    ],
+    [
+     "INT",
+     "9"
+    ],
+    [
+     "IDENT",
+     "x"
+    ],
+    [
+     "IDENT",
+     "a"
+    ],
+    [
+     "TRAP",
+     "!"
+    ],
+    [
+     "EQ",
+     "=="
+    ],
+    [
+     "ASSIGN",
+     "="
+    ],
+    [
+     "LE",
+     "<="
+    ],
+    [
+     "TRAP",
+     "!"
+    ],
+    [
+     "EQ",
+     "=="
+    ],
+    [
+     "ASSIGN",
+     "="
+    ],
+    [
+     "ASSIGN",
+     "="
+    ],
+    [
+     "LT",
+     "<"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "x9"
+    ],
+    [
+     "IDENT",
+     "_a"
+    ],
+    [
+     "INT",
+     "9"
+    ],
+    [
+     "IDENT",
+     "x"
+    ],
+    [
+     "IDENT",
+     "a"
+    ],
+    [
+     "TRAP",
+     "!"
+    ],
+    [
+     "EQ",
+     "=="
+    ],
+    [
+     "ASSIGN",
+     "="
+    ],
+    [
+     "LE",
+     "<="
+    ],
+    [
+     "TRAP",
+     "!"
+    ],
+    [
+     "EQ",
+     "=="
+    ],
+    [
+     "ASSIGN",
+     "="
+    ],
+    [
+     "ASSIGN",
+     "="
+    ],
+    [
+     "LT",
+     "<"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '!' → ловушка",
+    "нет перехода по символу '!' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "NBSP между токенами",
+   "group": "manual",
+   "input": "x y",
+   "negative": true,
+   "expect": [
+    [
+     "IDENT",
+     "x"
+    ],
+    [
+     "TRAP",
+     " "
+    ],
+    [
+     "IDENT",
+     "y"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "x"
+    ],
+    [
+     "TRAP",
+     " "
+    ],
+    [
+     "IDENT",
+     "y"
+    ]
+   ],
+   "errors": [
+    "символ U+00A0 вне алфавита ASCII → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "emoji",
+   "group": "manual",
+   "input": "a😀",
+   "negative": true,
+   "expect": [
+    [
+     "IDENT",
+     "a"
+    ],
+    [
+     "TRAP",
+     "😀"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "a"
+    ],
+    [
+     "TRAP",
+     "😀"
+    ]
+   ],
+   "errors": [
+    "символ U+1F600 вне алфавита ASCII → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "non-ASCII в комментарии",
+   "group": "manual",
+   "input": "// é",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "é"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "é"
+    ]
+   ],
+   "errors": [
+    "символ U+00E9 вне алфавита ASCII → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "fullwidth цифра",
+   "group": "manual",
+   "input": "１",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "１"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "１"
+    ]
+   ],
+   "errors": [
+    "символ U+FF11 вне алфавита ASCII → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "несколько ошибок подряд",
+   "group": "manual",
+   "input": "01 ! é",
+   "negative": true,
+   "expect": [
+    [
+     "INT_LEADING_ZERO",
+     "01"
+    ],
+    [
+     "TRAP",
+     "!"
+    ],
+    [
+     "TRAP",
+     "é"
+    ]
+   ],
+   "got": [
+    [
+     "INT_LEADING_ZERO",
+     "01"
+    ],
+    [
+     "TRAP",
+     "!"
+    ],
+    [
+     "TRAP",
+     "é"
+    ]
+   ],
+   "errors": [
+    "недопустимая лексема '01' (INT_LEADING_ZERO)",
+    "нет перехода по символу '!' → ловушка",
+    "символ U+00E9 вне алфавита ASCII → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii   0 '\\x00'",
+   "group": "ascii-coverage",
+   "input": "\u0000",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "\u0000"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "\u0000"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '\\x00' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii   1 '\\x01'",
+   "group": "ascii-coverage",
+   "input": "\u0001",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "\u0001"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "\u0001"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '\\x01' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii   2 '\\x02'",
+   "group": "ascii-coverage",
+   "input": "\u0002",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "\u0002"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "\u0002"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '\\x02' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii   3 '\\x03'",
+   "group": "ascii-coverage",
+   "input": "\u0003",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "\u0003"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "\u0003"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '\\x03' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii   4 '\\x04'",
+   "group": "ascii-coverage",
+   "input": "\u0004",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "\u0004"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "\u0004"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '\\x04' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii   5 '\\x05'",
+   "group": "ascii-coverage",
+   "input": "\u0005",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "\u0005"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "\u0005"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '\\x05' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii   6 '\\x06'",
+   "group": "ascii-coverage",
+   "input": "\u0006",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "\u0006"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "\u0006"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '\\x06' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii   7 '\\x07'",
+   "group": "ascii-coverage",
+   "input": "\u0007",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "\u0007"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "\u0007"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '\\x07' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii   8 '\\x08'",
+   "group": "ascii-coverage",
+   "input": "\b",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "\b"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "\b"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '\\x08' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii   9 '\\t'",
+   "group": "ascii-coverage",
+   "input": "\t",
+   "negative": false,
+   "expect": [],
+   "got": [],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  10 '\\n'",
+   "group": "ascii-coverage",
+   "input": "\n",
+   "negative": false,
+   "expect": [],
+   "got": [],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  11 '\\x0b'",
+   "group": "ascii-coverage",
+   "input": "\u000b",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "\u000b"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "\u000b"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '\\x0b' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  12 '\\x0c'",
+   "group": "ascii-coverage",
+   "input": "\f",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "\f"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "\f"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '\\x0c' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  13 '\\r'",
+   "group": "ascii-coverage",
+   "input": "\r",
+   "negative": false,
+   "expect": [],
+   "got": [],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  14 '\\x0e'",
+   "group": "ascii-coverage",
+   "input": "\u000e",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "\u000e"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "\u000e"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '\\x0e' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  15 '\\x0f'",
+   "group": "ascii-coverage",
+   "input": "\u000f",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "\u000f"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "\u000f"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '\\x0f' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  16 '\\x10'",
+   "group": "ascii-coverage",
+   "input": "\u0010",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "\u0010"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "\u0010"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '\\x10' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  17 '\\x11'",
+   "group": "ascii-coverage",
+   "input": "\u0011",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "\u0011"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "\u0011"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '\\x11' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  18 '\\x12'",
+   "group": "ascii-coverage",
+   "input": "\u0012",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "\u0012"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "\u0012"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '\\x12' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  19 '\\x13'",
+   "group": "ascii-coverage",
+   "input": "\u0013",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "\u0013"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "\u0013"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '\\x13' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  20 '\\x14'",
+   "group": "ascii-coverage",
+   "input": "\u0014",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "\u0014"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "\u0014"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '\\x14' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  21 '\\x15'",
+   "group": "ascii-coverage",
+   "input": "\u0015",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "\u0015"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "\u0015"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '\\x15' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  22 '\\x16'",
+   "group": "ascii-coverage",
+   "input": "\u0016",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "\u0016"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "\u0016"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '\\x16' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  23 '\\x17'",
+   "group": "ascii-coverage",
+   "input": "\u0017",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "\u0017"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "\u0017"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '\\x17' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  24 '\\x18'",
+   "group": "ascii-coverage",
+   "input": "\u0018",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "\u0018"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "\u0018"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '\\x18' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  25 '\\x19'",
+   "group": "ascii-coverage",
+   "input": "\u0019",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "\u0019"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "\u0019"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '\\x19' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  26 '\\x1a'",
+   "group": "ascii-coverage",
+   "input": "\u001a",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "\u001a"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "\u001a"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '\\x1a' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  27 '\\x1b'",
+   "group": "ascii-coverage",
+   "input": "\u001b",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "\u001b"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "\u001b"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '\\x1b' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  28 '\\x1c'",
+   "group": "ascii-coverage",
+   "input": "\u001c",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "\u001c"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "\u001c"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '\\x1c' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  29 '\\x1d'",
+   "group": "ascii-coverage",
+   "input": "\u001d",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "\u001d"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "\u001d"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '\\x1d' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  30 '\\x1e'",
+   "group": "ascii-coverage",
+   "input": "\u001e",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "\u001e"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "\u001e"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '\\x1e' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  31 '\\x1f'",
+   "group": "ascii-coverage",
+   "input": "\u001f",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "\u001f"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "\u001f"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '\\x1f' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  32 ' '",
+   "group": "ascii-coverage",
+   "input": " ",
+   "negative": false,
+   "expect": [],
+   "got": [],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  33 '!'",
+   "group": "ascii-coverage",
+   "input": "!",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "!"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "!"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '!' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  34 '\"'",
+   "group": "ascii-coverage",
+   "input": "\"",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "\""
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "\""
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '\"' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  35 '#'",
+   "group": "ascii-coverage",
+   "input": "#",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "#"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "#"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '#' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  36 '$'",
+   "group": "ascii-coverage",
+   "input": "$",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "$"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "$"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '$' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  37 '%'",
+   "group": "ascii-coverage",
+   "input": "%",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "%"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "%"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '%' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  38 '&'",
+   "group": "ascii-coverage",
+   "input": "&",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "&"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "&"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '&' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  39 \"'\"",
+   "group": "ascii-coverage",
+   "input": "'",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "'"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "'"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу \"'\" → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  40 '('",
+   "group": "ascii-coverage",
+   "input": "(",
+   "negative": false,
+   "expect": [
+    [
+     "LPAREN",
+     "("
+    ]
+   ],
+   "got": [
+    [
+     "LPAREN",
+     "("
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  41 ')'",
+   "group": "ascii-coverage",
+   "input": ")",
+   "negative": false,
+   "expect": [
+    [
+     "RPAREN",
+     ")"
+    ]
+   ],
+   "got": [
+    [
+     "RPAREN",
+     ")"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  42 '*'",
+   "group": "ascii-coverage",
+   "input": "*",
+   "negative": false,
+   "expect": [
+    [
+     "STAR",
+     "*"
+    ]
+   ],
+   "got": [
+    [
+     "STAR",
+     "*"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  43 '+'",
+   "group": "ascii-coverage",
+   "input": "+",
+   "negative": false,
+   "expect": [
+    [
+     "PLUS",
+     "+"
+    ]
+   ],
+   "got": [
+    [
+     "PLUS",
+     "+"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  44 ','",
+   "group": "ascii-coverage",
+   "input": ",",
+   "negative": false,
+   "expect": [
+    [
+     "COMMA",
+     ","
+    ]
+   ],
+   "got": [
+    [
+     "COMMA",
+     ","
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  45 '-'",
+   "group": "ascii-coverage",
+   "input": "-",
+   "negative": false,
+   "expect": [
+    [
+     "MINUS",
+     "-"
+    ]
+   ],
+   "got": [
+    [
+     "MINUS",
+     "-"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  46 '.'",
+   "group": "ascii-coverage",
+   "input": ".",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "."
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "."
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '.' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  47 '/'",
+   "group": "ascii-coverage",
+   "input": "/",
+   "negative": false,
+   "expect": [
+    [
+     "SLASH",
+     "/"
+    ]
+   ],
+   "got": [
+    [
+     "SLASH",
+     "/"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  48 '0'",
+   "group": "ascii-coverage",
+   "input": "0",
+   "negative": false,
+   "expect": [
+    [
+     "INT",
+     "0"
+    ]
+   ],
+   "got": [
+    [
+     "INT",
+     "0"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  49 '1'",
+   "group": "ascii-coverage",
+   "input": "1",
+   "negative": false,
+   "expect": [
+    [
+     "INT",
+     "1"
+    ]
+   ],
+   "got": [
+    [
+     "INT",
+     "1"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  50 '2'",
+   "group": "ascii-coverage",
+   "input": "2",
+   "negative": false,
+   "expect": [
+    [
+     "INT",
+     "2"
+    ]
+   ],
+   "got": [
+    [
+     "INT",
+     "2"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  51 '3'",
+   "group": "ascii-coverage",
+   "input": "3",
+   "negative": false,
+   "expect": [
+    [
+     "INT",
+     "3"
+    ]
+   ],
+   "got": [
+    [
+     "INT",
+     "3"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  52 '4'",
+   "group": "ascii-coverage",
+   "input": "4",
+   "negative": false,
+   "expect": [
+    [
+     "INT",
+     "4"
+    ]
+   ],
+   "got": [
+    [
+     "INT",
+     "4"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  53 '5'",
+   "group": "ascii-coverage",
+   "input": "5",
+   "negative": false,
+   "expect": [
+    [
+     "INT",
+     "5"
+    ]
+   ],
+   "got": [
+    [
+     "INT",
+     "5"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  54 '6'",
+   "group": "ascii-coverage",
+   "input": "6",
+   "negative": false,
+   "expect": [
+    [
+     "INT",
+     "6"
+    ]
+   ],
+   "got": [
+    [
+     "INT",
+     "6"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  55 '7'",
+   "group": "ascii-coverage",
+   "input": "7",
+   "negative": false,
+   "expect": [
+    [
+     "INT",
+     "7"
+    ]
+   ],
+   "got": [
+    [
+     "INT",
+     "7"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  56 '8'",
+   "group": "ascii-coverage",
+   "input": "8",
+   "negative": false,
+   "expect": [
+    [
+     "INT",
+     "8"
+    ]
+   ],
+   "got": [
+    [
+     "INT",
+     "8"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  57 '9'",
+   "group": "ascii-coverage",
+   "input": "9",
+   "negative": false,
+   "expect": [
+    [
+     "INT",
+     "9"
+    ]
+   ],
+   "got": [
+    [
+     "INT",
+     "9"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  58 ':'",
+   "group": "ascii-coverage",
+   "input": ":",
+   "negative": false,
+   "expect": [
+    [
+     "COLON",
+     ":"
+    ]
+   ],
+   "got": [
+    [
+     "COLON",
+     ":"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  59 ';'",
+   "group": "ascii-coverage",
+   "input": ";",
+   "negative": false,
+   "expect": [
+    [
+     "SEMI",
+     ";"
+    ]
+   ],
+   "got": [
+    [
+     "SEMI",
+     ";"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  60 '<'",
+   "group": "ascii-coverage",
+   "input": "<",
+   "negative": false,
+   "expect": [
+    [
+     "LT",
+     "<"
+    ]
+   ],
+   "got": [
+    [
+     "LT",
+     "<"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  61 '='",
+   "group": "ascii-coverage",
+   "input": "=",
+   "negative": false,
+   "expect": [
+    [
+     "ASSIGN",
+     "="
+    ]
+   ],
+   "got": [
+    [
+     "ASSIGN",
+     "="
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  62 '>'",
+   "group": "ascii-coverage",
+   "input": ">",
+   "negative": false,
+   "expect": [
+    [
+     "GT",
+     ">"
+    ]
+   ],
+   "got": [
+    [
+     "GT",
+     ">"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  63 '?'",
+   "group": "ascii-coverage",
+   "input": "?",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "?"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "?"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '?' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  64 '@'",
+   "group": "ascii-coverage",
+   "input": "@",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "@"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "@"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '@' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  65 'A'",
+   "group": "ascii-coverage",
+   "input": "A",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "A"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "A"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  66 'B'",
+   "group": "ascii-coverage",
+   "input": "B",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "B"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "B"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  67 'C'",
+   "group": "ascii-coverage",
+   "input": "C",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "C"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "C"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  68 'D'",
+   "group": "ascii-coverage",
+   "input": "D",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "D"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "D"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  69 'E'",
+   "group": "ascii-coverage",
+   "input": "E",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "E"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "E"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  70 'F'",
+   "group": "ascii-coverage",
+   "input": "F",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "F"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "F"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  71 'G'",
+   "group": "ascii-coverage",
+   "input": "G",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "G"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "G"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  72 'H'",
+   "group": "ascii-coverage",
+   "input": "H",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "H"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "H"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  73 'I'",
+   "group": "ascii-coverage",
+   "input": "I",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "I"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "I"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  74 'J'",
+   "group": "ascii-coverage",
+   "input": "J",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "J"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "J"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  75 'K'",
+   "group": "ascii-coverage",
+   "input": "K",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "K"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "K"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  76 'L'",
+   "group": "ascii-coverage",
+   "input": "L",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "L"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "L"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  77 'M'",
+   "group": "ascii-coverage",
+   "input": "M",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "M"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "M"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  78 'N'",
+   "group": "ascii-coverage",
+   "input": "N",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "N"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "N"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  79 'O'",
+   "group": "ascii-coverage",
+   "input": "O",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "O"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "O"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  80 'P'",
+   "group": "ascii-coverage",
+   "input": "P",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "P"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "P"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  81 'Q'",
+   "group": "ascii-coverage",
+   "input": "Q",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "Q"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "Q"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  82 'R'",
+   "group": "ascii-coverage",
+   "input": "R",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "R"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "R"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  83 'S'",
+   "group": "ascii-coverage",
+   "input": "S",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "S"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "S"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  84 'T'",
+   "group": "ascii-coverage",
+   "input": "T",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "T"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "T"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  85 'U'",
+   "group": "ascii-coverage",
+   "input": "U",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "U"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "U"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  86 'V'",
+   "group": "ascii-coverage",
+   "input": "V",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "V"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "V"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  87 'W'",
+   "group": "ascii-coverage",
+   "input": "W",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "W"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "W"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  88 'X'",
+   "group": "ascii-coverage",
+   "input": "X",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "X"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "X"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  89 'Y'",
+   "group": "ascii-coverage",
+   "input": "Y",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "Y"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "Y"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  90 'Z'",
+   "group": "ascii-coverage",
+   "input": "Z",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "Z"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "Z"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  91 '['",
+   "group": "ascii-coverage",
+   "input": "[",
+   "negative": false,
+   "expect": [
+    [
+     "LBRACKET",
+     "["
+    ]
+   ],
+   "got": [
+    [
+     "LBRACKET",
+     "["
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  92 '\\\\'",
+   "group": "ascii-coverage",
+   "input": "\\",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "\\"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "\\"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '\\\\' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  93 ']'",
+   "group": "ascii-coverage",
+   "input": "]",
+   "negative": false,
+   "expect": [
+    [
+     "RBRACKET",
+     "]"
+    ]
+   ],
+   "got": [
+    [
+     "RBRACKET",
+     "]"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  94 '^'",
+   "group": "ascii-coverage",
+   "input": "^",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "^"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "^"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '^' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  95 '_'",
+   "group": "ascii-coverage",
+   "input": "_",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "_"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "_"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  96 '`'",
+   "group": "ascii-coverage",
+   "input": "`",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "`"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "`"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '`' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  97 'a'",
+   "group": "ascii-coverage",
+   "input": "a",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "a"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "a"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  98 'b'",
+   "group": "ascii-coverage",
+   "input": "b",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "b"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "b"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii  99 'c'",
+   "group": "ascii-coverage",
+   "input": "c",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "c"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "c"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii 100 'd'",
+   "group": "ascii-coverage",
+   "input": "d",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "d"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "d"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii 101 'e'",
+   "group": "ascii-coverage",
+   "input": "e",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "e"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "e"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii 102 'f'",
+   "group": "ascii-coverage",
+   "input": "f",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "f"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "f"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii 103 'g'",
+   "group": "ascii-coverage",
+   "input": "g",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "g"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "g"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii 104 'h'",
+   "group": "ascii-coverage",
+   "input": "h",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "h"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "h"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii 105 'i'",
+   "group": "ascii-coverage",
+   "input": "i",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "i"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "i"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii 106 'j'",
+   "group": "ascii-coverage",
+   "input": "j",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "j"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "j"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii 107 'k'",
+   "group": "ascii-coverage",
+   "input": "k",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "k"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "k"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii 108 'l'",
+   "group": "ascii-coverage",
+   "input": "l",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "l"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "l"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii 109 'm'",
+   "group": "ascii-coverage",
+   "input": "m",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "m"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "m"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii 110 'n'",
+   "group": "ascii-coverage",
+   "input": "n",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "n"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "n"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii 111 'o'",
+   "group": "ascii-coverage",
+   "input": "o",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "o"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "o"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii 112 'p'",
+   "group": "ascii-coverage",
+   "input": "p",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "p"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "p"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii 113 'q'",
+   "group": "ascii-coverage",
+   "input": "q",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "q"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "q"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii 114 'r'",
+   "group": "ascii-coverage",
+   "input": "r",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "r"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "r"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii 115 's'",
+   "group": "ascii-coverage",
+   "input": "s",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "s"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "s"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii 116 't'",
+   "group": "ascii-coverage",
+   "input": "t",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "t"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "t"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii 117 'u'",
+   "group": "ascii-coverage",
+   "input": "u",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "u"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "u"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii 118 'v'",
+   "group": "ascii-coverage",
+   "input": "v",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "v"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "v"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii 119 'w'",
+   "group": "ascii-coverage",
+   "input": "w",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "w"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "w"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii 120 'x'",
+   "group": "ascii-coverage",
+   "input": "x",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "x"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "x"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii 121 'y'",
+   "group": "ascii-coverage",
+   "input": "y",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "y"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "y"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii 122 'z'",
+   "group": "ascii-coverage",
+   "input": "z",
+   "negative": false,
+   "expect": [
+    [
+     "IDENT",
+     "z"
+    ]
+   ],
+   "got": [
+    [
+     "IDENT",
+     "z"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii 123 '{'",
+   "group": "ascii-coverage",
+   "input": "{",
+   "negative": false,
+   "expect": [
+    [
+     "LBRACE",
+     "{"
+    ]
+   ],
+   "got": [
+    [
+     "LBRACE",
+     "{"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii 124 '|'",
+   "group": "ascii-coverage",
+   "input": "|",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "|"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "|"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '|' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii 125 '}'",
+   "group": "ascii-coverage",
+   "input": "}",
+   "negative": false,
+   "expect": [
+    [
+     "RBRACE",
+     "}"
+    ]
+   ],
+   "got": [
+    [
+     "RBRACE",
+     "}"
+    ]
+   ],
+   "errors": [],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii 126 '~'",
+   "group": "ascii-coverage",
+   "input": "~",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     "~"
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     "~"
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '~' → ловушка"
+   ],
+   "status": "PASS"
+  },
+  {
+   "name": "ascii 127 '\\x7f'",
+   "group": "ascii-coverage",
+   "input": "",
+   "negative": true,
+   "expect": [
+    [
+     "TRAP",
+     ""
+    ]
+   ],
+   "got": [
+    [
+     "TRAP",
+     ""
+    ]
+   ],
+   "errors": [
+    "нет перехода по символу '\\x7f' → ловушка"
+   ],
+   "status": "PASS"
+  }
+ ]
+}
