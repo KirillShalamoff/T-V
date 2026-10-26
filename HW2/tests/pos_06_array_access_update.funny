@@ -1,0 +1,1 @@
+function f(a) returns r { r = a[0]; a[1] = r; }

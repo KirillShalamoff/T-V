@@ -1,0 +1,55 @@
+{
+  "file": "neg_03_missing_expr.funny",
+  "negative": true,
+  "ok": true,
+  "sexpr": "(program (function f () (returns r) (block (error))))",
+  "ast": {
+    "type": "Program",
+    "functions": [
+      {
+        "type": "Function",
+        "name": "f",
+        "params": [],
+        "returns": "r",
+        "requires": null,
+        "ensures": null,
+        "body": {
+          "type": "Block",
+          "stmts": [
+            {
+              "type": "Error",
+              "message": "recovered from syntax error",
+              "pos": {
+                "line": 1,
+                "col": 30
+              }
+            }
+          ],
+          "pos": {
+            "line": 1,
+            "col": 24
+          }
+        },
+        "pos": {
+          "line": 1,
+          "col": 1
+        }
+      }
+    ],
+    "pos": {
+      "line": 1,
+      "col": 1
+    }
+  },
+  "errors": [
+    "error: expected expression but got ';' at 1:30"
+  ],
+  "error_details": [
+    {
+      "stage": "syntax",
+      "line": 1,
+      "col": 30,
+      "message": "expected expression but got ';'"
+    }
+  ]
+}

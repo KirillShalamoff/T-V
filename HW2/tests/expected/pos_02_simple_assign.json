@@ -1,0 +1,63 @@
+{
+  "file": "pos_02_simple_assign.funny",
+  "negative": false,
+  "ok": true,
+  "sexpr": "(program (function f (x) (returns r) (block (= r x))))",
+  "ast": {
+    "type": "Program",
+    "functions": [
+      {
+        "type": "Function",
+        "name": "f",
+        "params": [
+          "x"
+        ],
+        "returns": "r",
+        "requires": null,
+        "ensures": null,
+        "body": {
+          "type": "Block",
+          "stmts": [
+            {
+              "type": "Assign",
+              "target": {
+                "type": "Ident",
+                "name": "r",
+                "pos": {
+                  "line": 1,
+                  "col": 27
+                }
+              },
+              "value": {
+                "type": "Ident",
+                "name": "x",
+                "pos": {
+                  "line": 1,
+                  "col": 31
+                }
+              },
+              "pos": {
+                "line": 1,
+                "col": 27
+              }
+            }
+          ],
+          "pos": {
+            "line": 1,
+            "col": 25
+          }
+        },
+        "pos": {
+          "line": 1,
+          "col": 1
+        }
+      }
+    ],
+    "pos": {
+      "line": 1,
+      "col": 1
+    }
+  },
+  "errors": [],
+  "error_details": []
+}

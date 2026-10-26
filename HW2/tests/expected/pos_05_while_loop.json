@@ -1,0 +1,85 @@
+{
+  "file": "pos_05_while_loop.funny",
+  "negative": false,
+  "ok": true,
+  "sexpr": "(program (function f () (returns r) (block (while true (block (= r 1))))))",
+  "ast": {
+    "type": "Program",
+    "functions": [
+      {
+        "type": "Function",
+        "name": "f",
+        "params": [],
+        "returns": "r",
+        "requires": null,
+        "ensures": null,
+        "body": {
+          "type": "Block",
+          "stmts": [
+            {
+              "type": "While",
+              "cond": {
+                "type": "Bool",
+                "value": true,
+                "pos": {
+                  "line": 1,
+                  "col": 33
+                }
+              },
+              "body": {
+                "type": "Block",
+                "stmts": [
+                  {
+                    "type": "Assign",
+                    "target": {
+                      "type": "Ident",
+                      "name": "r",
+                      "pos": {
+                        "line": 1,
+                        "col": 41
+                      }
+                    },
+                    "value": {
+                      "type": "Int",
+                      "value": 1,
+                      "pos": {
+                        "line": 1,
+                        "col": 45
+                      }
+                    },
+                    "pos": {
+                      "line": 1,
+                      "col": 41
+                    }
+                  }
+                ],
+                "pos": {
+                  "line": 1,
+                  "col": 39
+                }
+              },
+              "pos": {
+                "line": 1,
+                "col": 26
+              }
+            }
+          ],
+          "pos": {
+            "line": 1,
+            "col": 24
+          }
+        },
+        "pos": {
+          "line": 1,
+          "col": 1
+        }
+      }
+    ],
+    "pos": {
+      "line": 1,
+      "col": 1
+    }
+  },
+  "errors": [],
+  "error_details": []
+}

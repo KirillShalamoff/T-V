@@ -1,0 +1,86 @@
+================================================================================
+ФИНАЛЬНАЯ LL(1)-ГРАММАТИКА ЯЗЫКА FUNNY (ПО МАТЕРИАЛАМ HW2.pptx)
+Ветка: LL(1) — рекурсивный спуск вручную + восстановление в режиме паники
+================================================================================
+
+1. ИСХОДНАЯ ГРАММАТИКА ЯЗЫКА FUNNY (СЛАЙДЫ 3-4)
+--------------------------------------------------------------------------------
+program     := function*
+function    := "function" IDENT "(" params ")" "returns" IDENT
+               requires? ensures? block
+params      := (IDENT ("," IDENT)*)?
+requires    := "requires" expr
+ensures     := "ensures" expr
+block       := "{" stmt* "}"
+stmt        := assign | if | while | assert | assume | block
+assign      := IDENT "=" expr ";"
+             | IDENT "[" expr "]" "=" expr ";"
+if          := "if" "(" expr ")" block ("else" block)?
+while       := "while" "(" expr ")" block
+assert      := "assert" expr ";"
+assume      := "assume" expr ";"
+
+expr        := or_expr
+or_expr     := and_expr ("or" and_expr)*
+and_expr    := not_expr ("and" not_expr)*
+not_expr    := "not" not_expr | cmp_expr
+cmp_expr    := add_expr (("==" | "!=" | "<" | "<=" | ">" | ">=") add_expr)?
+add_expr    := mul_expr (("+" | "-") mul_expr)*
+mul_expr    := unary (("*" | "/") unary)*
+unary       := "-" unary | primary
+primary     := INT | "true" | "false" | IDENT
+             | IDENT "[" expr "]"
+             | IDENT "(" args? ")"
+             | "(" expr ")"
+
+2. ПРИВЕДЕНИЕ К LL(1): ЛЕВАЯ ФАКТОРИЗАЦИЯ И УСТРАНЕНИЕ ЛЕВОЙ РЕКУРСИИ
+--------------------------------------------------------------------------------
+В исходной грамматике:
+  а) Выражения записаны в EBNF-форме через итерацию `A (op A)*` — левая рекурсия
+     уже заменена на правую итерацию (цикл `while` в рекурсивном спуске,
+     сохраняющий левую ассоциативность в AST).
+  б) Нарушение LL(1) есть в двух местах из-за общего префикса `IDENT`:
+     - В `assign`: обе альтернативы начинаются с `IDENT` (`IDENT "=" expr` и `IDENT "[" expr "]" "=" expr`).
+     - В `primary`: три альтернативы начинаются с `IDENT` (`IDENT`, `IDENT "[" expr "]"`, `IDENT "(" args? ")"`).
+
+После левой факторизации получаем строгую LL(1)-грамматику:
+
+  assign       := IDENT assign_tail
+  assign_tail  := "=" expr ";"
+                | "[" expr "]" "=" expr ";"
+
+  primary      := INT
+                | "true"
+                | "false"
+                | "(" expr ")"
+                | IDENT primary_tail
+  primary_tail := "[" expr "]"
+                | "(" args? ")"
+                | ε
+
+3. ТАБЛИЦА FIRST И FOLLOW (ОСНОВНЫЕ НЕТЕРМИНАЛЫ)
+--------------------------------------------------------------------------------
+Нетерминал   | FIRST                                        | FOLLOW
+-------------+----------------------------------------------+------------------------------------
+program      | { "function", EOF }                          | { EOF }
+function     | { "function" }                               | { "function", EOF }
+params       | { IDENT, ε }                                 | { ")" }
+requires     | { "requires", ε }                            | { "ensures", "{" }
+ensures      | { "ensures", ε }                             | { "{" }
+block        | { "{" }                                      | { "function", IDENT, "if", "while",
+             |                                              |   "assert", "assume", "{", "}",
+             |                                              |   "else", EOF }
+stmt         | { IDENT, "if", "while", "assert",            | { IDENT, "if", "while", "assert",
+             |   "assume", "{" }                            |   "assume", "{", "}" }
+assign       | { IDENT }                                    | { IDENT, "if", "while", "assert",
+             |                                              |   "assume", "{", "}" }
+assign_tail  | { "=", "[" }                                 | FOLLOW(assign)
+expr         | { "not", "-", INT, "true", "false",          | { ";", ")", "]", ",", "{" }
+             |   IDENT, "(" }                               |
+primary_tail | { "[", "(", ε }                              | { "*", "/", "+", "-", "==", "!=",
+             |                                              |   "<", "<=", ">", ">=", "and", "or",
+             |                                              |   ";", ")", "]", ",", "{" }
+
+Проверка условия LL(1):
+- Для `assign_tail`: FIRST("=" expr ";") = {"="}, FIRST("[" expr "]" "=" expr ";") = {"["} -> пересечение пусто (∅).
+- Для `primary_tail`: FIRST("[" expr "]") = {"["}, FIRST("(" args? ")") = {"("}, и они не пересекаются с FOLLOW(primary_tail).

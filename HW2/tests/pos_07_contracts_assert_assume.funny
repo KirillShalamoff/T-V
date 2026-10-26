@@ -1,0 +1,5 @@
+function f(x) returns r requires x > 0 ensures r >= 0 {
+    assume x > 0;
+    r = x;
+    assert r > 0;
+}

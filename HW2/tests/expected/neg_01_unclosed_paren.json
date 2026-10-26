@@ -1,0 +1,25 @@
+{
+  "file": "neg_01_unclosed_paren.funny",
+  "negative": true,
+  "ok": true,
+  "sexpr": "(program)",
+  "ast": {
+    "type": "Program",
+    "functions": [],
+    "pos": {
+      "line": 1,
+      "col": 1
+    }
+  },
+  "errors": [
+    "error: expected 'parameter name (IDENT)' but got 'returns' at 1:13"
+  ],
+  "error_details": [
+    {
+      "stage": "syntax",
+      "line": 1,
+      "col": 13,
+      "message": "expected 'parameter name (IDENT)' but got 'returns'"
+    }
+  ]
+}

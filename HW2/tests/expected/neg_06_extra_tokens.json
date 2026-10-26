@@ -1,0 +1,46 @@
+{
+  "file": "neg_06_extra_tokens.funny",
+  "negative": true,
+  "ok": true,
+  "sexpr": "(program (function f () (returns r) (block)))",
+  "ast": {
+    "type": "Program",
+    "functions": [
+      {
+        "type": "Function",
+        "name": "f",
+        "params": [],
+        "returns": "r",
+        "requires": null,
+        "ensures": null,
+        "body": {
+          "type": "Block",
+          "stmts": [],
+          "pos": {
+            "line": 1,
+            "col": 24
+          }
+        },
+        "pos": {
+          "line": 1,
+          "col": 1
+        }
+      }
+    ],
+    "pos": {
+      "line": 1,
+      "col": 1
+    }
+  },
+  "errors": [
+    "error: unexpected token 'extra' after function declaration at 1:28"
+  ],
+  "error_details": [
+    {
+      "stage": "syntax",
+      "line": 1,
+      "col": 28,
+      "message": "unexpected token 'extra' after function declaration"
+    }
+  ]
+}

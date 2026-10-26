@@ -1,0 +1,78 @@
+{
+  "file": "neg_04_if_no_paren.funny",
+  "negative": true,
+  "ok": true,
+  "sexpr": "(program (function f () (returns r) (block (error) (error) (block))))",
+  "ast": {
+    "type": "Program",
+    "functions": [
+      {
+        "type": "Function",
+        "name": "f",
+        "params": [],
+        "returns": "r",
+        "requires": null,
+        "ensures": null,
+        "body": {
+          "type": "Block",
+          "stmts": [
+            {
+              "type": "Error",
+              "message": "recovered from syntax error",
+              "pos": {
+                "line": 1,
+                "col": 29
+              }
+            },
+            {
+              "type": "Error",
+              "message": "recovered from syntax error",
+              "pos": {
+                "line": 1,
+                "col": 31
+              }
+            },
+            {
+              "type": "Block",
+              "stmts": [],
+              "pos": {
+                "line": 1,
+                "col": 35
+              }
+            }
+          ],
+          "pos": {
+            "line": 1,
+            "col": 24
+          }
+        },
+        "pos": {
+          "line": 1,
+          "col": 1
+        }
+      }
+    ],
+    "pos": {
+      "line": 1,
+      "col": 1
+    }
+  },
+  "errors": [
+    "error: expected '(' but got 'x' at 1:29",
+    "error: expected '=' or '[' after identifier 'x', got '>' at 1:31"
+  ],
+  "error_details": [
+    {
+      "stage": "syntax",
+      "line": 1,
+      "col": 29,
+      "message": "expected '(' but got 'x'"
+    },
+    {
+      "stage": "syntax",
+      "line": 1,
+      "col": 31,
+      "message": "expected '=' or '[' after identifier 'x', got '>'"
+    }
+  ]
+}

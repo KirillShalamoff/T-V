@@ -1,0 +1,271 @@
+{
+  "cases": [
+    {
+      "name": "keywords and ident",
+      "input": "function f(x) returns r requires x > 0 ensures r >= 0",
+      "expect": [
+        [
+          "FUNCTION",
+          "function"
+        ],
+        [
+          "IDENT",
+          "f"
+        ],
+        [
+          "LPAREN",
+          "("
+        ],
+        [
+          "IDENT",
+          "x"
+        ],
+        [
+          "RPAREN",
+          ")"
+        ],
+        [
+          "RETURNS",
+          "returns"
+        ],
+        [
+          "IDENT",
+          "r"
+        ],
+        [
+          "REQUIRES",
+          "requires"
+        ],
+        [
+          "IDENT",
+          "x"
+        ],
+        [
+          "GT",
+          ">"
+        ],
+        [
+          "INT",
+          "0"
+        ],
+        [
+          "ENSURES",
+          "ensures"
+        ],
+        [
+          "IDENT",
+          "r"
+        ],
+        [
+          "GE",
+          ">="
+        ],
+        [
+          "INT",
+          "0"
+        ]
+      ],
+      "negative": false
+    },
+    {
+      "name": "array assign and ops",
+      "input": "a[0] = 42 + b[1] * 2; // comment\n",
+      "expect": [
+        [
+          "IDENT",
+          "a"
+        ],
+        [
+          "LBRACKET",
+          "["
+        ],
+        [
+          "INT",
+          "0"
+        ],
+        [
+          "RBRACKET",
+          "]"
+        ],
+        [
+          "ASSIGN",
+          "="
+        ],
+        [
+          "INT",
+          "42"
+        ],
+        [
+          "PLUS",
+          "+"
+        ],
+        [
+          "IDENT",
+          "b"
+        ],
+        [
+          "LBRACKET",
+          "["
+        ],
+        [
+          "INT",
+          "1"
+        ],
+        [
+          "RBRACKET",
+          "]"
+        ],
+        [
+          "STAR",
+          "*"
+        ],
+        [
+          "INT",
+          "2"
+        ],
+        [
+          "SEMI",
+          ";"
+        ]
+      ],
+      "negative": false
+    },
+    {
+      "name": "boolean logic",
+      "input": "if (not true or false and x == 1 != 2) { assert true; assume false; }",
+      "expect": [
+        [
+          "IF",
+          "if"
+        ],
+        [
+          "LPAREN",
+          "("
+        ],
+        [
+          "NOT",
+          "not"
+        ],
+        [
+          "TRUE",
+          "true"
+        ],
+        [
+          "OR",
+          "or"
+        ],
+        [
+          "FALSE",
+          "false"
+        ],
+        [
+          "AND",
+          "and"
+        ],
+        [
+          "IDENT",
+          "x"
+        ],
+        [
+          "EQ",
+          "=="
+        ],
+        [
+          "INT",
+          "1"
+        ],
+        [
+          "NEQ",
+          "!="
+        ],
+        [
+          "INT",
+          "2"
+        ],
+        [
+          "RPAREN",
+          ")"
+        ],
+        [
+          "LBRACE",
+          "{"
+        ],
+        [
+          "ASSERT",
+          "assert"
+        ],
+        [
+          "TRUE",
+          "true"
+        ],
+        [
+          "SEMI",
+          ";"
+        ],
+        [
+          "ASSUME",
+          "assume"
+        ],
+        [
+          "FALSE",
+          "false"
+        ],
+        [
+          "SEMI",
+          ";"
+        ],
+        [
+          "RBRACE",
+          "}"
+        ]
+      ],
+      "negative": false
+    },
+    {
+      "name": "bad identifier error token",
+      "input": "123abc",
+      "expect": [
+        [
+          "BAD_IDENT",
+          "123abc"
+        ]
+      ],
+      "negative": true
+    },
+    {
+      "name": "trap symbol @",
+      "input": "@",
+      "expect": [
+        [
+          "TRAP",
+          "@"
+        ]
+      ],
+      "negative": true
+    }
+  ],
+  "ascii_coverage": {
+    "@default": "TRAP",
+    "@skip": " \t\r\n",
+    "IDENT": "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ_",
+    "INT": "0123456789",
+    "ASSIGN": "=",
+    "LT": "<",
+    "GT": ">",
+    "PLUS": "+",
+    "MINUS": "-",
+    "STAR": "*",
+    "SLASH": "/",
+    "PERCENT": "%",
+    "BANG": "!",
+    "LPAREN": "(",
+    "RPAREN": ")",
+    "LBRACE": "{",
+    "RBRACE": "}",
+    "LBRACKET": "[",
+    "RBRACKET": "]",
+    "COLON": ":",
+    "SEMI": ";",
+    "COMMA": ","
+  }
+}

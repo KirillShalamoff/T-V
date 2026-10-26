@@ -1,0 +1,157 @@
+{
+  "file": "pos_06_array_access_update.funny",
+  "negative": false,
+  "ok": true,
+  "sexpr": "(program (function f (a) (returns r) (block (= r (index a 0)) (= a (update a 1 r)))))",
+  "ast": {
+    "type": "Program",
+    "functions": [
+      {
+        "type": "Function",
+        "name": "f",
+        "params": [
+          "a"
+        ],
+        "returns": "r",
+        "requires": null,
+        "ensures": null,
+        "body": {
+          "type": "Block",
+          "stmts": [
+            {
+              "type": "Assign",
+              "target": {
+                "type": "Ident",
+                "name": "r",
+                "pos": {
+                  "line": 1,
+                  "col": 27
+                }
+              },
+              "value": {
+                "type": "ArrayIndex",
+                "base": {
+                  "type": "Ident",
+                  "name": "a",
+                  "pos": {
+                    "line": 1,
+                    "col": 31
+                  }
+                },
+                "index": {
+                  "type": "Int",
+                  "value": 0,
+                  "pos": {
+                    "line": 1,
+                    "col": 33
+                  }
+                },
+                "pos": {
+                  "line": 1,
+                  "col": 32
+                }
+              },
+              "pos": {
+                "line": 1,
+                "col": 27
+              }
+            },
+            {
+              "type": "Assign",
+              "target": {
+                "type": "ArrayIndex",
+                "base": {
+                  "type": "Ident",
+                  "name": "a",
+                  "pos": {
+                    "line": 1,
+                    "col": 37
+                  }
+                },
+                "index": {
+                  "type": "Int",
+                  "value": 1,
+                  "pos": {
+                    "line": 1,
+                    "col": 39
+                  }
+                },
+                "pos": {
+                  "line": 1,
+                  "col": 38
+                }
+              },
+              "value": {
+                "type": "Ident",
+                "name": "r",
+                "pos": {
+                  "line": 1,
+                  "col": 44
+                }
+              },
+              "functional_sugar": {
+                "target": {
+                  "type": "Ident",
+                  "name": "a",
+                  "pos": {
+                    "line": 1,
+                    "col": 37
+                  }
+                },
+                "value": {
+                  "type": "ArrayUpdate",
+                  "base": {
+                    "type": "Ident",
+                    "name": "a",
+                    "pos": {
+                      "line": 1,
+                      "col": 37
+                    }
+                  },
+                  "index": {
+                    "type": "Int",
+                    "value": 1,
+                    "pos": {
+                      "line": 1,
+                      "col": 39
+                    }
+                  },
+                  "value": {
+                    "type": "Ident",
+                    "name": "r",
+                    "pos": {
+                      "line": 1,
+                      "col": 44
+                    }
+                  },
+                  "pos": {
+                    "line": 1,
+                    "col": 37
+                  }
+                }
+              },
+              "pos": {
+                "line": 1,
+                "col": 37
+              }
+            }
+          ],
+          "pos": {
+            "line": 1,
+            "col": 25
+          }
+        },
+        "pos": {
+          "line": 1,
+          "col": 1
+        }
+      }
+    ],
+    "pos": {
+      "line": 1,
+      "col": 1
+    }
+  },
+  "errors": [],
+  "error_details": []
+}

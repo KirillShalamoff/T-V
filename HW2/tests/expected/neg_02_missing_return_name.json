@@ -1,0 +1,25 @@
+{
+  "file": "neg_02_missing_return_name.funny",
+  "negative": true,
+  "ok": true,
+  "sexpr": "(program)",
+  "ast": {
+    "type": "Program",
+    "functions": [],
+    "pos": {
+      "line": 1,
+      "col": 1
+    }
+  },
+  "errors": [
+    "error: expected 'return variable (IDENT)' but got '{' at 1:22"
+  ],
+  "error_details": [
+    {
+      "stage": "syntax",
+      "line": 1,
+      "col": 22,
+      "message": "expected 'return variable (IDENT)' but got '{'"
+    }
+  ]
+}

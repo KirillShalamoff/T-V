@@ -1,0 +1,25 @@
+{
+  "file": "neg_05_empty_input.funny",
+  "negative": true,
+  "ok": true,
+  "sexpr": "(program)",
+  "ast": {
+    "type": "Program",
+    "functions": [],
+    "pos": {
+      "line": 1,
+      "col": 1
+    }
+  },
+  "errors": [
+    "error: unexpected empty input: expected at least one 'function' at 1:1"
+  ],
+  "error_details": [
+    {
+      "stage": "syntax",
+      "line": 1,
+      "col": 1,
+      "message": "unexpected empty input: expected at least one 'function'"
+    }
+  ]
+}

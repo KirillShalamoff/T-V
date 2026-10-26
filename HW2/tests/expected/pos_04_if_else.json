@@ -1,0 +1,135 @@
+{
+  "file": "pos_04_if_else.funny",
+  "negative": false,
+  "ok": true,
+  "sexpr": "(program (function f (x) (returns r) (block (if (> x 0) (block (= r x)) (block (= r 0))))))",
+  "ast": {
+    "type": "Program",
+    "functions": [
+      {
+        "type": "Function",
+        "name": "f",
+        "params": [
+          "x"
+        ],
+        "returns": "r",
+        "requires": null,
+        "ensures": null,
+        "body": {
+          "type": "Block",
+          "stmts": [
+            {
+              "type": "If",
+              "cond": {
+                "type": "BinaryOp",
+                "op": ">",
+                "left": {
+                  "type": "Ident",
+                  "name": "x",
+                  "pos": {
+                    "line": 1,
+                    "col": 31
+                  }
+                },
+                "right": {
+                  "type": "Int",
+                  "value": 0,
+                  "pos": {
+                    "line": 1,
+                    "col": 35
+                  }
+                },
+                "pos": {
+                  "line": 1,
+                  "col": 33
+                }
+              },
+              "then": {
+                "type": "Block",
+                "stmts": [
+                  {
+                    "type": "Assign",
+                    "target": {
+                      "type": "Ident",
+                      "name": "r",
+                      "pos": {
+                        "line": 1,
+                        "col": 40
+                      }
+                    },
+                    "value": {
+                      "type": "Ident",
+                      "name": "x",
+                      "pos": {
+                        "line": 1,
+                        "col": 44
+                      }
+                    },
+                    "pos": {
+                      "line": 1,
+                      "col": 40
+                    }
+                  }
+                ],
+                "pos": {
+                  "line": 1,
+                  "col": 38
+                }
+              },
+              "else": {
+                "type": "Block",
+                "stmts": [
+                  {
+                    "type": "Assign",
+                    "target": {
+                      "type": "Ident",
+                      "name": "r",
+                      "pos": {
+                        "line": 1,
+                        "col": 56
+                      }
+                    },
+                    "value": {
+                      "type": "Int",
+                      "value": 0,
+                      "pos": {
+                        "line": 1,
+                        "col": 60
+                      }
+                    },
+                    "pos": {
+                      "line": 1,
+                      "col": 56
+                    }
+                  }
+                ],
+                "pos": {
+                  "line": 1,
+                  "col": 54
+                }
+              },
+              "pos": {
+                "line": 1,
+                "col": 27
+              }
+            }
+          ],
+          "pos": {
+            "line": 1,
+            "col": 25
+          }
+        },
+        "pos": {
+          "line": 1,
+          "col": 1
+        }
+      }
+    ],
+    "pos": {
+      "line": 1,
+      "col": 1
+    }
+  },
+  "errors": [],
+  "error_details": []
+}

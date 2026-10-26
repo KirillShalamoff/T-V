@@ -1,0 +1,80 @@
+{
+  "file": "pos_03_add_expr.funny",
+  "negative": false,
+  "ok": true,
+  "sexpr": "(program (function f (x y) (returns r) (block (= r (+ x y)))))",
+  "ast": {
+    "type": "Program",
+    "functions": [
+      {
+        "type": "Function",
+        "name": "f",
+        "params": [
+          "x",
+          "y"
+        ],
+        "returns": "r",
+        "requires": null,
+        "ensures": null,
+        "body": {
+          "type": "Block",
+          "stmts": [
+            {
+              "type": "Assign",
+              "target": {
+                "type": "Ident",
+                "name": "r",
+                "pos": {
+                  "line": 1,
+                  "col": 30
+                }
+              },
+              "value": {
+                "type": "BinaryOp",
+                "op": "+",
+                "left": {
+                  "type": "Ident",
+                  "name": "x",
+                  "pos": {
+                    "line": 1,
+                    "col": 34
+                  }
+                },
+                "right": {
+                  "type": "Ident",
+                  "name": "y",
+                  "pos": {
+                    "line": 1,
+                    "col": 38
+                  }
+                },
+                "pos": {
+                  "line": 1,
+                  "col": 36
+                }
+              },
+              "pos": {
+                "line": 1,
+                "col": 30
+              }
+            }
+          ],
+          "pos": {
+            "line": 1,
+            "col": 28
+          }
+        },
+        "pos": {
+          "line": 1,
+          "col": 1
+        }
+      }
+    ],
+    "pos": {
+      "line": 1,
+      "col": 1
+    }
+  },
+  "errors": [],
+  "error_details": []
+}
